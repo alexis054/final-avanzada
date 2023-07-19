@@ -61,12 +61,15 @@ public:
 
     const pair<unsigned int, unsigned int> &getMF_R() const;
 
+    const pair<unsigned int, unsigned int> &getMF_intensidad() const;
+
 private:
     Imagen Datos;
     vector<Pixel> Vec;
     pair<unsigned int, unsigned int> MF_R;
     pair<unsigned int, unsigned int> MF_G;
-    pair<unsigned int, unsigned int> MG_B;
+    pair<unsigned int, unsigned int> MF_B;
+    pair<unsigned int, unsigned int> MF_intensidad;
 
 };
 

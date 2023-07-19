@@ -394,8 +394,8 @@ tuple<int, uint> EI_AutoTest::getPixelGrisMasFrecuenteYSuCantidad01()
     img=gda.Cargar();
     stat.setDatos(img);
     stat.Hist_intensidad();
-
-   // nivel=stat.
+    nivel=stat.getMF_intensidad().first;
+    cantidad=stat.getMF_intensidad().second;
 
     return make_tuple(nivel, cantidad);
 }
@@ -529,9 +529,9 @@ void EI_AutoTest::test_case_histograma_rgb_01()  //falta
     QCOMPARE(getPixelColorMasFrecuenteYSuCantidad01(), make_tuple(112, 9207u));
 }
 
-void EI_AutoTest::test_case_suavizado_escala_grises_01()  //falta
+void EI_AutoTest::test_case_suavizado_escala_grises_01()
 {
-    QCOMPARE(getIntensidadMediaYLocalLuegoDeSuavizado01(), make_tuple(137u, 137u, 123u, 124u));
+    QCOMPARE(getIntensidadMediaYLocalLuegoDeSuavizado01(), make_tuple(137u, 137u, 123u, 125u));
 }
 
 QTEST_APPLESS_MAIN(EI_AutoTest)

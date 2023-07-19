@@ -16,13 +16,18 @@ map<int,int> Estadisticos::Hist_intensidad()
     }
    for(auto &x: Vec )
     {
-        histo_intensidad[(int)(x.getR()*255.0)]=histo_intensidad[(int)(x.getR()*255.0)]+1;
+        histo_intensidad[x.intensidad()]=histo_intensidad[x.intensidad()]+1;
     }
-   cout<<histo_intensidad.size();
-//    auto it = histo_intensidad.begin();
-//    for (it = histo_intensidad.begin(); it!= histo_intensidad.end(); it++){
-//        cout<<it->first<<endl;
-//    }
+
+
+   auto max_it = std::max_element(histo_intensidad.begin(), histo_intensidad.end(),
+           [](const std::pair<int, int>& p1, const std::pair<int, int>& p2) {
+               return p1.second < p2.second;
+    });
+
+   MF_intensidad.first=max_it->first;
+   MF_intensidad.second=max_it->second;
+
     return histo_intensidad;
 }
 
@@ -30,27 +35,19 @@ map<int,int> Estadisticos::Hist_R()
 {
         map<int,int>histo_R;
 
-//        for(auto &x:Vec)
-//        {
-//            histo_R[(int)(x.getR()*255.0f)]+=1;
-//        }
-//        auto it = histo_R.begin();
-//        for (it = histo_R.begin(); it!= histo_R.end(); it++){
-//            cout<<it->first<<": "<<endl;
-//        }
         for( int i = 0; i < Datos.getM()-1 ; i++)
          {
              histo_R.insert(make_pair(i,0));
          }
         for(unsigned int i=0;i<Vec.size();++i)
          {
-             histo_R[(int)(Vec[i].getR()*255.0)]=histo_R[(int)(Vec[i].getR()*255.0)]+1;
+             histo_R[(int)(Vec[i].getR())]=histo_R[Vec[i].getR()]+1;
          }
         auto max_it = std::max_element(histo_R.begin(), histo_R.end(),
                 [](const std::pair<int, int>& p1, const std::pair<int, int>& p2) {
                     return p1.second < p2.second;
                 });
-cout<<"MAXIMO FIRST: "<<max_it->second;
+
         MF_R.first=max_it->first;
         MF_R.second=max_it->second;
 
@@ -396,6 +393,11 @@ const vector<Pixel> &Estadisticos::getVec() const
 const pair<unsigned int, unsigned int> &Estadisticos::getMF_R() const
 {
     return MF_R;
+}
+
+const pair<unsigned int, unsigned int> &Estadisticos::getMF_intensidad() const
+{
+    return MF_intensidad;
 }
 
 
