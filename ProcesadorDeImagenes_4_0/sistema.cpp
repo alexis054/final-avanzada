@@ -7,7 +7,7 @@ cout<<"AAAAA";
 
 void Sistema::ejecutar(QApplication *pPtrApp)
 {
-    unsigned int opcion=0;
+  /*  unsigned int opcion=0;
     string raiz="../imagenes/";
 //    Imagen img;
 //    GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_02.ppm");
@@ -56,9 +56,16 @@ void Sistema::ejecutar(QApplication *pPtrApp)
             break;
         }
      }
-        setDir(Dir);
+        setDir(Dir);*/
 
-   }
+   Graficador graf;
+    Imagen img;
+       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_02.ppm");
+       img=gda.Cargar();
+
+       graf.setImagen(img);
+
+       graf.mostrar(img.getAncho(),img.getAlto(),pPtrApp);
 
 }
 

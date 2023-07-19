@@ -59,9 +59,9 @@ cout<<"MAXIMO FIRST: "<<max_it->second;
         return histo_R;
 }
 
-map<float,int> Estadisticos::Hist_G()
+map<int,int> Estadisticos::Hist_G()
 {
-    map<float,int>histo_G;
+    map<int,int>histo_G;
 
     for(auto &x:Vec)
     {
@@ -71,9 +71,9 @@ map<float,int> Estadisticos::Hist_G()
     return histo_G;
 }
 
-map<float,int> Estadisticos::Hist_B()
+map<int,int> Estadisticos::Hist_B()
 {
-    map<float,int>histo_B;
+    map<int,int>histo_B;
 
     for(auto &x:Vec)
     {
@@ -86,9 +86,9 @@ map<float,int> Estadisticos::Hist_B()
 
 //promedios
 
-float Estadisticos::Promedio_Intensidad()
+int Estadisticos::Promedio_Intensidad()
 {
-    float promedio=0;
+    int promedio=0;
 
     for(unsigned int i=0; i<Vec.size();++i)
     {
@@ -97,9 +97,9 @@ float Estadisticos::Promedio_Intensidad()
     return promedio/Vec.size();
 }
 
-float Estadisticos::Promedio_R()
+int Estadisticos::Promedio_R()
 {
-    float promedio=0;
+    int promedio=0;
 
     for(unsigned int i=0; i<Vec.size();++i)
     {
@@ -108,9 +108,9 @@ float Estadisticos::Promedio_R()
     return promedio/Vec.size();
 }
 
-float Estadisticos::Promedio_G()
+int Estadisticos::Promedio_G()
 {
-    float promedio=0;
+    int promedio=0;
 
     for(unsigned int i=0; i<Vec.size();++i)
     {
@@ -120,9 +120,9 @@ float Estadisticos::Promedio_G()
 }
 
 
-float Estadisticos::Promedio_B()
+int Estadisticos::Promedio_B()
 {
-    float promedio=0;
+    int promedio=0;
 
     for(unsigned int i=0; i<Vec.size();++i)
     {
@@ -175,9 +175,9 @@ Pixel Estadisticos::Mediana()
 
 }
 
-float Estadisticos::MedianaR()
+int Estadisticos::MedianaR()
 {
-    vector<float> aux;
+    vector<int> aux;
 
     for(unsigned int i=0;i<Vec.size();++i)
     {
@@ -195,9 +195,9 @@ float Estadisticos::MedianaR()
 
 
 
-float Estadisticos::MedianaG()
+int Estadisticos::MedianaG()
 {
-    vector<float> aux;
+    vector<int> aux;
 
     for(unsigned int i=0;i<Vec.size();++i)
     {
@@ -213,9 +213,9 @@ float Estadisticos::MedianaG()
     else return aux[n/2];
 }
 
-float Estadisticos::MedianaB()
+int Estadisticos::MedianaB()
 {
-    vector<float> aux;
+    vector<int> aux;
 
     for(unsigned int i=0;i<Vec.size();++i)
     {
@@ -276,21 +276,21 @@ int Estadisticos::IntenMediaTotal()
 
 //Maximos y Minimos
 
-float Estadisticos::Max_Intensidad()
+int Estadisticos::Max_Intensidad()
 {
     return Vec.rbegin()->intensidadRGB();
 }
 
-float Estadisticos::Min_Intensidad()
+int Estadisticos::Min_Intensidad()
 {
     return Vec.begin()->intensidadRGB();
 }
 
 
 
-float Estadisticos::Max_R()
+int Estadisticos::Max_R()
 {
-    float R=0;
+    int R=0;
 
     for(unsigned int i=0;i<Vec.size(); ++i)
     {
@@ -303,10 +303,10 @@ float Estadisticos::Max_R()
     return R;
 }
 
-float Estadisticos::Max_G()
+int Estadisticos::Max_G()
 {
 
-    float G=0;
+    int G=0;
 
     for(unsigned int i=0;i<Vec.size(); ++i)
     {
@@ -319,10 +319,10 @@ float Estadisticos::Max_G()
     return G;
 }
 
-float Estadisticos::Max_B()
+int Estadisticos::Max_B()
 {
 
-    float B=0;
+    int B=0;
 
     for(unsigned int i=0;i<Vec.size(); ++i)
     {
@@ -338,9 +338,9 @@ float Estadisticos::Max_B()
 
 
 
-float Estadisticos::Min_R()
+int Estadisticos::Min_R()
 {
-    float min=Vec[0].getR();
+    int min=Vec[0].getR();
     for(unsigned i=0;i<Vec.size();++i)
     {
         if(Vec[i].getR()<min)
@@ -350,9 +350,9 @@ float Estadisticos::Min_R()
     return min;
 }
 
-float Estadisticos::Min_G()
+int Estadisticos::Min_G()
 {
-    float min=Vec[0].getG();
+    int min=Vec[0].getG();
     for(unsigned i=0;i<Vec.size();++i)
     {
         if(Vec[i].getG()<min)
@@ -362,9 +362,9 @@ float Estadisticos::Min_G()
     return min;
 }
 
-float Estadisticos::Min_B()
+int Estadisticos::Min_B()
 {
-    float min=Vec[0].getB();
+    int min=Vec[0].getB();
     for(unsigned i=0;i<Vec.size();++i)
     {
         if(Vec[i].getB()<min)

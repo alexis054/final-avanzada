@@ -16,38 +16,38 @@ public:
 //histogramas
     map<int,int> Hist_intensidad();
     map<int,int> Hist_R();
-    map<float,int> Hist_G();
-    map<float,int> Hist_B();
+    map<int,int> Hist_G();
+    map<int,int> Hist_B();
 
 
 //Promedios
-    float Promedio_Intensidad();
-    float Promedio_R();
-    float Promedio_G();
-    float Promedio_B();
+    int Promedio_Intensidad();
+    int Promedio_R();
+    int Promedio_G();
+    int Promedio_B();
 
  //medidas de tendencia central
     Pixel Moda();
     Pixel Mediana();
-    float MedianaR();
-    float MedianaG();
-    float MedianaB();
+    int MedianaR();
+    int MedianaG();
+    int MedianaB();
     vector<float> DesvioSTD();
     int IntenMediaTotal();
 
 
 
 //maximos y minimos
-    float Max_Intensidad();
-    float Min_Intensidad();
+    int Max_Intensidad();
+    int Min_Intensidad();
 
-    float Max_R();
-    float Max_G();
-    float Max_B();
+    int Max_R();
+    int Max_G();
+    int Max_B();
 
-    float Min_R();
-    float Min_G();
-    float Min_B();
+    int Min_R();
+    int Min_G();
+    int Min_B();
 
 //metodos miscelaneos
     void setDatos(const Imagen &newDatos);

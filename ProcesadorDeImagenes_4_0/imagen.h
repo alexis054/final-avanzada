@@ -28,7 +28,7 @@ public:
  //metodos
 
     void ModificarPixel(int pPosF,int pPosC, Pixel pPix);
-    void ModificarPixelTerna(int pPosF, int pPosC, float pR, float pG, float pB);
+    void ModificarPixelTerna(int pPosF, int pPosC, int pR, int pG, int pB);
     void ReservarMemoria();
     Pixel getPixel(int pPosF,int pPosC);
 

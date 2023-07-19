@@ -15,10 +15,10 @@ Imagen GestorDeArchivosPNM::Cargar()
 
     int valorBool=0;
 
-    int pos;
-     int columnas=0;
+   int pos;
+   int columnas=0;
    int filas=0;
-    int M=0;
+   int M=0;
 
 
     //abro el archivo
@@ -40,7 +40,8 @@ Imagen GestorDeArchivosPNM::Cargar()
 
             getline(archi,formato,'\n');    //leo el formato hasta que encuetre final de linea
             aux.setFormato(formato);
-        //  cout<<formato;
+
+
             getline(archi,metadatos,'\n');  //leo metadatos
             aux.setMetadatos(metadatos);
 
@@ -56,8 +57,6 @@ Imagen GestorDeArchivosPNM::Cargar()
 
             aux.setAlto(filas);
             aux.setAncho(columnas);
-            cout<<"filas: "<<filas<<endl;
-            cout<<"columnas: "<<columnas<<endl;
 
             if(filas==0||columnas==0)
             {
@@ -79,7 +78,7 @@ Imagen GestorDeArchivosPNM::Cargar()
                 M=1;
 
             aux.setM(M);//asigno rango dinamico
-            cout<<"MAXIMO RANGO DINAMICO: "<<aux.getM()<<endl;
+
             if(formato == "P1")//monocromatica y txt
             {
                 for(int i=0;i<filas ; ++i)
@@ -118,9 +117,9 @@ Imagen GestorDeArchivosPNM::Cargar()
             if(formato == "P3")//rgb y txt
             {
 
-                 float valorPixR=0;
-                 float valorPixG=0;
-                 float valorPixB=0;
+                 int valorPixR=0;
+                 int valorPixG=0;
+                 int valorPixB=0;
 
                 for(int i=0;i<filas ; ++i)
 
@@ -166,18 +165,17 @@ Imagen GestorDeArchivosPNM::Cargar()
                     if(formato=="P5")
                     {
                        unsigned  char GrisesChr=0;
-                         float Gris=0.0;
-                       // cout<<M;
+                         int Gris=0;
+
                         for(int i=0;i<filas ;++i)
                         {
 
                             for(int j=0;j<columnas;++j)
                             {
                                 archibin.read((char*)& GrisesChr,sizeof (GrisesChr));
-                                Gris=(float)GrisesChr;
+                                Gris=(int)GrisesChr;
                                 aux.ModificarPixelTerna(i,j,Gris,Gris,Gris);
-                                 // cout<<"["<<i<<"] ["<<j<< "] = "<<Gris<<" "<<Gris<<" "<<Gris<<endl;
-                            //cout<<Gris/M;
+
                             }
 
                         }
@@ -185,9 +183,9 @@ Imagen GestorDeArchivosPNM::Cargar()
 
                     if(formato == "P6")
                     {
-                        float rojo=0.0;
-                        float verde=0.0;
-                        float azul=0.0;
+                        int rojo=0;
+                        int verde=0;
+                        int azul=0;
 
                         unsigned char valorPixR=0;
                         unsigned char valorPixG=0;
@@ -201,12 +199,12 @@ Imagen GestorDeArchivosPNM::Cargar()
                                 archibin.read((char*)& valorPixG,sizeof (unsigned char));
                                 archibin.read((char*)& valorPixB,sizeof (unsigned char));
 
-                                rojo=(float)valorPixR;   //casteo de char a float
-                                verde=(float)valorPixG;
-                                azul=(float)valorPixB;
+                                rojo=(int)valorPixR;   //casteo de char a int
+                                verde=(int)valorPixG;
+                                azul=(int)valorPixB;
 
-                                aux.ModificarPixelTerna(i,j,(float)rojo/M,(float)verde/M,(float)azul/M);
-                                //cout<<"["<<i<<"] ["<<j<< "] = "<<rojo<<" "<<verde<<" "<<azul<<endl;
+                                aux.ModificarPixelTerna(i,j,rojo,verde,azul);
+
                             }
 
                         }

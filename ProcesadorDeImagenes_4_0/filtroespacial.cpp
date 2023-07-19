@@ -10,11 +10,11 @@ void FiltroEspacial::filtradoMediana(Imagen &pImagen)
     Imagen imgGuardar = pImagen;//Guardo la imagen sin filtrar
 
 
-    vector<float> auxR;
-    vector<float> auxG;
-    vector<float> auxB;
+    vector<int> auxR;
+    vector<int> auxG;
+    vector<int> auxB;
 
-    float R,G,B;
+    int R,G,B;
 
 
     for(int i=1;i<pImagen.getAlto()-1;++i)
@@ -80,7 +80,7 @@ void FiltroEspacial::filtradoMediana(Imagen &pImagen)
 
 void FiltroEspacial::filtradoSuavizado(Imagen &pImagen)
 {
-    float R,G,B;
+    int R,G,B;
 
     for(int i=1;i<pImagen.getAlto()-1;++i)
     {

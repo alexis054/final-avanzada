@@ -11,27 +11,27 @@ class Pixel
 public:
     Pixel();
 
-    float getB() const;
-    float getR() const;
-    float getG() const;
+    int getB() const;
+    int getR() const;
+    int getG() const;
 
     float modulo();
-    float intensidadRGB();
+    int intensidadRGB();
     int getIntensidadGris();
 
 
-    void setR(float newR);
-    void setG(float newG);
-    void setB(float newB);
+    void setR(int newR);
+    void setG(int newG);
+    void setB(int newB);
 
-    float operator [](int pos);
+    int operator [](int pos);
     bool operator <(Pixel &pComp);
     Pixel operator +(Pixel &pPix);
     Pixel operator /(const int pConstante);
 
 private:
-    float R,G,B;
-    vector<float> RGB;
+    int R,G,B;
+    vector<int> RGB;
 };
 
 #endif // PIXEL_H

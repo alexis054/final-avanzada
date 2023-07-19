@@ -13,17 +13,17 @@ Pixel::Pixel()
 //-------------------------------------------------------------------------------------------------------------------------
 
 
-float Pixel::getB() const
+int Pixel::getB() const
 {
     return B;
 }
 
-float Pixel::getR() const
+int Pixel::getR() const
 {
     return R;
 }
 
-float Pixel::getG() const
+int Pixel::getG() const
 {
     return G;
 }
@@ -33,25 +33,25 @@ float Pixel::getG() const
 //                                             Setters
 //-------------------------------------------------------------------------------------------------------------------------
 
-void Pixel::setR(float newR)
+void Pixel::setR(int newR)
 {
     R = newR;
     RGB[0]=R;
 }
 
-void Pixel::setG(float newG)
+void Pixel::setG(int newG)
 {
     G = newG;
     RGB[1]=G;
 }
 
-void Pixel::setB(float newB)
+void Pixel::setB(int newB)
 {
     B = newB;
     RGB[2]=B;
 }
 
-float Pixel::operator [](int pos)
+int Pixel::operator [](int pos)
 {
     return RGB[pos];
 }
@@ -87,11 +87,10 @@ float Pixel::modulo()
         return modulo;
 }
 
-float Pixel::intensidadRGB()
+int Pixel::intensidadRGB()
 {
-    float intensidad=0;
 
-   // intensidad=R*100+G*10+B;
+
     int acum=0;
     int val;
 
@@ -100,14 +99,14 @@ float Pixel::intensidadRGB()
     }
     val=(acum/3);
 
-    return val*255.0;
+    return val;
 
-   // return intensidad;
+
 }
 
 int Pixel::getIntensidadGris()
 {
- // cout<<"VALOR rgb"<<RGB[0];
+
     return RGB[0];
 }
 

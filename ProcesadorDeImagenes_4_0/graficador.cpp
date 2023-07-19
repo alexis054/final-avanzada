@@ -54,6 +54,7 @@ void Graficador::paintGL()
 {
     Pixel pix;
     float R,G,B;
+    int M=imagen.getM();
 
     resizeGL(width(),height());
     glClear(GL_COLOR_BUFFER_BIT);
@@ -74,9 +75,9 @@ void Graficador::paintGL()
 
            pix=imagen.getPixel(f,c);
 
-           R=pix.getR();
-           G=pix.getG();
-           B=pix.getB();
+           R=(float)pix.getR()/(float)M;
+           G=(float)pix.getG()/(float)M;
+           B=(float)pix.getB()/(float)M;
 
 
              glColor3f(R,G,B);

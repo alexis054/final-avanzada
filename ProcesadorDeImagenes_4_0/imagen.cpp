@@ -58,7 +58,7 @@ void Imagen::setMetadatos(const string &newMetadatos)
     Img[pPosF][pPosC].setB(pPix.getB());
     }
 
-    void Imagen::ModificarPixelTerna(int pPosF, int pPosC, float pR, float pG, float pB)
+    void Imagen::ModificarPixelTerna(int pPosF, int pPosC, int pR, int pG, int pB)
     {
         Img[pPosF][pPosC].setR(pR);
         Img[pPosF][pPosC].setG(pG);
