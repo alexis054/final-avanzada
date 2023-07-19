@@ -33,7 +33,6 @@ public:
     int MedianaG();
     int MedianaB();
     vector<float> DesvioSTD();
-    int IntenMediaTotal();
 
 
 

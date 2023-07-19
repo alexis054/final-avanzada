@@ -60,7 +60,7 @@ void Sistema::ejecutar(QApplication *pPtrApp)
 
    Graficador graf;
     Imagen img;
-       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_02.ppm");
+       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_1/hospital-robot_01.pgm");
        img=gda.Cargar();
 
        graf.setImagen(img);

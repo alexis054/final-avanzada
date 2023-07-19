@@ -261,7 +261,7 @@ uint EI_AutoTest::getIntensidadNivelDeGris01()
 
    pix=img.getPixel(1,3);
 
-   nivelDeGris=pix.getIntensidadGris();
+   nivelDeGris=pix.intensidad();
 
     return nivelDeGris;
 }
@@ -285,7 +285,7 @@ uint EI_AutoTest::getIntensidadNivelDeGris02()
 
    pix=img.getPixel(1,2);
 
-   nivelDeGris=pix.getIntensidadGris();
+   nivelDeGris=pix.intensidad();
 
 
 
@@ -311,9 +311,9 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB01()
 
     img=gda.Cargar();
     pix=img.getPixel(1,3);
-    R=(int)(pix.getR()*255.0);
-    G=(int)(pix.getG()*255.0);
-    B=(int)(pix.getB()*255.0);
+    R=pix.getR();
+    G=pix.getG();
+    B=pix.getB();
 
     return make_tuple(R, G, B);
 }
@@ -337,9 +337,9 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB02()
 
     img=gda.Cargar();
     pix=img.getPixel(1,2);
-    R=(int)(pix.getR()*255.0);
-    G=(int)(pix.getG()*255.0);
-    B=(int)(pix.getB()*255.0);
+    R=(pix.getR());
+    G=(pix.getG());
+    B=(pix.getB());
 
 
     return make_tuple(R, G, B);
@@ -365,9 +365,9 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB03()
 
     img=gda.Cargar();
     pix=img.getPixel(163,401);
-    R=(int)(pix.getR()*255.0);
-    G=(int)(pix.getG()*255.0);
-    B=(int)(pix.getB()*255.0);
+    R=(pix.getR());
+    G=(pix.getG());
+    B=(pix.getB());
 
 
     return make_tuple(R, G, B);
@@ -442,28 +442,25 @@ tuple<uint, uint, uint, uint> EI_AutoTest::getIntensidadMediaYLocalLuegoDeSuaviz
      */
 
     // Aquí el código de la prueba
-    string ruta= "../grupo_imagenes_1/entre_rios_03.ppm";
+    string ruta= "../grupo_imagenes_1/hospital-robot_01.pgm";
     GestorDeArchivosPNM gda(ruta);
     Imagen img;
     Estadisticos stat;
     FiltroEspacial filtro;
-    Pixel pix;
+
 
     img=gda.Cargar();
     stat.setDatos(img);
 
-    pix=img.getPixel(50,60);
-   // cout<<"VALOR ROJO"<<pix.getR();
 
-    cout<<"MEDIA TOTAL"<<stat.IntenMediaTotal();
 
     intensidad_media_inicial=stat.Promedio_Intensidad();
-    intensidad_local_inicial=img.getPixel(50,60).intensidadRGB();
+    intensidad_local_inicial=img.getPixel(50,60).intensidad();
 
     filtro.filtradoSuavizado(img);
 
     intensidad_media_final=stat.Promedio_Intensidad();
-    intensidad_local_final=img.getPixel(50,60).intensidadRGB();
+    intensidad_local_final=img.getPixel(50,60).intensidad();
 
 
 

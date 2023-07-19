@@ -87,16 +87,16 @@ float Pixel::modulo()
         return modulo;
 }
 
-int Pixel::intensidadRGB()
+int Pixel::intensidad()
 {
 
 
-    int acum=0;
-    int val;
 
-    for(int k=0;k<3;k++){
-     acum=acum+RGB[k];
-    }
+    int acum=0;
+    int val=0;
+
+    acum=accumulate(RGB.begin(),RGB.end(),0);
+
     val=(acum/3);
 
     return val;
@@ -104,15 +104,9 @@ int Pixel::intensidadRGB()
 
 }
 
-int Pixel::getIntensidadGris()
-{
-
-    return RGB[0];
-}
-
 
 bool Pixel:: operator <(Pixel &pComp)
 
 {
-   return this->intensidadRGB()<pComp.intensidadRGB();
+   return this->intensidad()<pComp.intensidad();
 }

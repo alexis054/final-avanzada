@@ -4,6 +4,9 @@
 #include <vector>
 #include <math.h>
 #include <iostream>
+#include <algorithm>
+#include <numeric>
+
 using namespace std;
 
 class Pixel
@@ -16,8 +19,8 @@ public:
     int getG() const;
 
     float modulo();
-    int intensidadRGB();
-    int getIntensidadGris();
+    int intensidad();
+
 
 
     void setR(int newR);

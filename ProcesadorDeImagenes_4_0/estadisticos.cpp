@@ -92,7 +92,7 @@ int Estadisticos::Promedio_Intensidad()
 
     for(unsigned int i=0; i<Vec.size();++i)
     {
-        promedio+=Vec[i].intensidadRGB();
+        promedio+=Vec[i].intensidad();
     }
     return promedio/Vec.size();
 }
@@ -140,7 +140,7 @@ Pixel Estadisticos::Moda()
 
     for(unsigned i=1;i<n;++i)
     {
-        if(Vec[i].intensidadRGB()==Vec[i-1].intensidadRGB())
+        if(Vec[i].intensidad()==Vec[i-1].intensidad())
             count++;
         else
         {
@@ -245,7 +245,7 @@ vector<float> aux;
         AcumR+=pow(Vec[i].getR()-this->Promedio_R(),2.0);
         AcumG+=pow(Vec[i].getG()-this->Promedio_G(),2.0);
         AcumB+=pow(Vec[i].getB()-this->Promedio_B(),2.0);
-        Acumint+=pow(Vec[i].intensidadRGB()-this->Promedio_Intensidad(),2.0);
+        Acumint+=pow(Vec[i].intensidad()-this->Promedio_Intensidad(),2.0);
     }
     DesvioR=sqrt(AcumR/Vec.size());
     DesvioG=sqrt(AcumG/Vec.size());
@@ -260,30 +260,17 @@ vector<float> aux;
     return aux;
 }
 
-int Estadisticos::IntenMediaTotal()
-{
-    int acum=0;
-
-    for(auto &x: Vec)
-    {
-            acum+=x.getIntensidadGris();
-    }
-
-
-    return acum/Vec.size();
-
-}
 
 //Maximos y Minimos
 
 int Estadisticos::Max_Intensidad()
 {
-    return Vec.rbegin()->intensidadRGB();
+    return Vec.rbegin()->intensidad();
 }
 
 int Estadisticos::Min_Intensidad()
 {
-    return Vec.begin()->intensidadRGB();
+    return Vec.begin()->intensidad();
 }
 
 
@@ -386,7 +373,7 @@ void Estadisticos::Ordenar()
     {
        for(int j=0;j<Datos.getAncho();++j)
         {
-            Vec.push_back(Datos.getPixel(0,0));
+            Vec.push_back(Datos.getPixel(i,j));
 
         }
     }
