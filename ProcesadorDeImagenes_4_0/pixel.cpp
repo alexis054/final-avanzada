@@ -91,23 +91,23 @@ float Pixel::intensidadRGB()
 {
     float intensidad=0;
 
-    intensidad=R*100+G*10+B;
+   // intensidad=R*100+G*10+B;
+    int acum=0;
+    int val;
 
-    return intensidad;
+    for(int k=0;k<3;k++){
+     acum=acum+RGB[k];
+    }
+    val=(acum/3);
+
+    return val*255.0;
+
+   // return intensidad;
 }
 
 int Pixel::getIntensidadGris()
 {
-    /* int acum=0;
-     int val=0;
-     for(unsigned int i=0;i<RGB.size();++i)
-     {
-         acum+=RGB[i];
-     }
-
-     val=(acum/RGB.size());
-    return val;*/
-
+ // cout<<"VALOR rgb"<<RGB[0];
     return RGB[0];
 }
 

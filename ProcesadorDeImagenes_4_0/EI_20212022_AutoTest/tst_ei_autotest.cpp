@@ -1,4 +1,4 @@
-#include <QtTest>
+﻿#include <QtTest>
 
 // add necessary includes here
 #include <vector>
@@ -8,6 +8,12 @@
 #include "../gestordearchivosaic.h"
 #include "../imagen.h"
 #include "../pixel.h"
+#include "../estadisticos.h"
+#include "../filtro.h"
+#include "../filtropap.h"
+#include "../filtroespacial.h"
+#include "../sistema.h"
+
 
 typedef unsigned int uint;
 
@@ -163,10 +169,14 @@ EI_AutoTest::~EI_AutoTest()
 
 vector<string> EI_AutoTest::listaDeArchivosDeImagen()
 {
-    //string ruta = "../EI_20212022_AutoTest/directorio_1/";
+    string ruta = "../EI_20212022_AutoTest/directorio_1/";
     vector<string> resultado;
 
     // Aquí el código de la prueba
+
+      Sistema sist;
+   sist.setDir(ruta);
+    resultado=sist.getListaDeArchivos();
 
 
     return resultado;
@@ -267,6 +277,17 @@ uint EI_AutoTest::getIntensidadNivelDeGris02()
 
     // Aquí el código de la prueba
 
+    string ruta= "../grupo_imagenes_1/test_01.pgm";
+    GestorDeArchivosPNM gda(ruta);
+    Imagen img;
+    Pixel pix;
+   img=gda.Cargar();
+
+   pix=img.getPixel(1,2);
+
+   nivelDeGris=pix.getIntensidadGris();
+
+
 
     return nivelDeGris;
 }
@@ -364,6 +385,17 @@ tuple<int, uint> EI_AutoTest::getPixelGrisMasFrecuenteYSuCantidad01()
 
     // Aquí el código de la prueba
 
+    string ruta= "../grupo_imagenes_1/tigre_01.pgm";
+    GestorDeArchivosPNM gda(ruta);
+    Imagen img;
+    Estadisticos stat;
+    map<float,float> intensidad;
+
+    img=gda.Cargar();
+    stat.setDatos(img);
+    stat.Hist_intensidad();
+
+   // nivel=stat.
 
     return make_tuple(nivel, cantidad);
 }
@@ -380,6 +412,17 @@ tuple<int, uint> EI_AutoTest::getPixelColorMasFrecuenteYSuCantidad01()
 
     // Aquí el código de la prueba
 
+    string ruta= "../grupo_imagenes_2/predio_fi_uner_01.ppm";
+    GestorDeArchivosPNM gda(ruta);
+    Imagen img;
+    Estadisticos stat;
+
+    img=gda.Cargar();
+    stat.setDatos(img);
+
+    stat.Hist_R();
+    nivelRojo=stat.getMF_R().first;
+    cantidad=stat.getMF_R().second;
 
     return make_tuple(nivelRojo, cantidad);
 }
@@ -399,6 +442,30 @@ tuple<uint, uint, uint, uint> EI_AutoTest::getIntensidadMediaYLocalLuegoDeSuaviz
      */
 
     // Aquí el código de la prueba
+    string ruta= "../grupo_imagenes_1/entre_rios_03.ppm";
+    GestorDeArchivosPNM gda(ruta);
+    Imagen img;
+    Estadisticos stat;
+    FiltroEspacial filtro;
+    Pixel pix;
+
+    img=gda.Cargar();
+    stat.setDatos(img);
+
+    pix=img.getPixel(50,60);
+   // cout<<"VALOR ROJO"<<pix.getR();
+
+    cout<<"MEDIA TOTAL"<<stat.IntenMediaTotal();
+
+    intensidad_media_inicial=stat.Promedio_Intensidad();
+    intensidad_local_inicial=img.getPixel(50,60).intensidadRGB();
+
+    filtro.filtradoSuavizado(img);
+
+    intensidad_media_final=stat.Promedio_Intensidad();
+    intensidad_local_final=img.getPixel(50,60).intensidadRGB();
+
+
 
     return make_tuple(intensidad_media_inicial, intensidad_media_final, intensidad_local_inicial, intensidad_local_final);
 }
@@ -455,17 +522,17 @@ void EI_AutoTest::test_case_imagenes_pixeles_rgb_03()
     QCOMPARE(getIntensidadesRGB03(), make_tuple(206u, 197u, 190u));
 }
 
-void EI_AutoTest::test_case_histograma_escala_grises_01()
+void EI_AutoTest::test_case_histograma_escala_grises_01() //falta
 {
     QCOMPARE(getPixelGrisMasFrecuenteYSuCantidad01(), make_tuple(142, 3058u));
 }
 
-void EI_AutoTest::test_case_histograma_rgb_01()
+void EI_AutoTest::test_case_histograma_rgb_01()  //falta
 {
     QCOMPARE(getPixelColorMasFrecuenteYSuCantidad01(), make_tuple(112, 9207u));
 }
 
-void EI_AutoTest::test_case_suavizado_escala_grises_01()
+void EI_AutoTest::test_case_suavizado_escala_grises_01()  //falta
 {
     QCOMPARE(getIntensidadMediaYLocalLuegoDeSuavizado01(), make_tuple(137u, 137u, 123u, 124u));
 }

@@ -79,7 +79,7 @@ Imagen GestorDeArchivosPNM::Cargar()
                 M=1;
 
             aux.setM(M);//asigno rango dinamico
-
+            cout<<"MAXIMO RANGO DINAMICO: "<<aux.getM()<<endl;
             if(formato == "P1")//monocromatica y txt
             {
                 for(int i=0;i<filas ; ++i)
@@ -176,7 +176,7 @@ Imagen GestorDeArchivosPNM::Cargar()
                                 archibin.read((char*)& GrisesChr,sizeof (GrisesChr));
                                 Gris=(float)GrisesChr;
                                 aux.ModificarPixelTerna(i,j,Gris,Gris,Gris);
-                                  cout<<"["<<i<<"] ["<<j<< "] = "<<Gris<<" "<<Gris<<" "<<Gris<<endl;
+                                 // cout<<"["<<i<<"] ["<<j<< "] = "<<Gris<<" "<<Gris<<" "<<Gris<<endl;
                             //cout<<Gris/M;
                             }
 

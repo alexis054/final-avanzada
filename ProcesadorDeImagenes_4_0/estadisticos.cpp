@@ -6,28 +6,55 @@ Estadisticos::Estadisticos()
 }
 //Histogramas
 
-map<float,int> Estadisticos::Hist_intensidad()
+map<int,int> Estadisticos::Hist_intensidad()
 {
-    map<float,int>histo_intensidad;
+    map<int,int>histo_intensidad;
 
-    for(auto &x:Vec)//para cada pixel dentro de Vec
+   for( int i = 0; i < Datos.getM()-1 ; i++)
     {
-        histo_intensidad[x.intensidadRGB()*2.29f]++;//asigno al histograma clave: pixel normalizado y para cada
-                                                 //clave con el mismo valor, sumo uno
-                                                 //se multiplica por 2.29 para que quede en 255 (intensidad es 111 el max)
+        histo_intensidad.insert(make_pair(i,0));
     }
-
+   for(auto &x: Vec )
+    {
+        histo_intensidad[(int)(x.getR()*255.0)]=histo_intensidad[(int)(x.getR()*255.0)]+1;
+    }
+   cout<<histo_intensidad.size();
+//    auto it = histo_intensidad.begin();
+//    for (it = histo_intensidad.begin(); it!= histo_intensidad.end(); it++){
+//        cout<<it->first<<endl;
+//    }
     return histo_intensidad;
 }
 
-map<float,int> Estadisticos::Hist_R()
+map<int,int> Estadisticos::Hist_R()
 {
-        map<float,int>histo_R;
+        map<int,int>histo_R;
 
-        for(auto &x:Vec)
-        {
-            histo_R[x.getR()*255.0f]++;
-        }
+//        for(auto &x:Vec)
+//        {
+//            histo_R[(int)(x.getR()*255.0f)]+=1;
+//        }
+//        auto it = histo_R.begin();
+//        for (it = histo_R.begin(); it!= histo_R.end(); it++){
+//            cout<<it->first<<": "<<endl;
+//        }
+        for( int i = 0; i < Datos.getM()-1 ; i++)
+         {
+             histo_R.insert(make_pair(i,0));
+         }
+        for(unsigned int i=0;i<Vec.size();++i)
+         {
+             histo_R[(int)(Vec[i].getR()*255.0)]=histo_R[(int)(Vec[i].getR()*255.0)]+1;
+         }
+        auto max_it = std::max_element(histo_R.begin(), histo_R.end(),
+                [](const std::pair<int, int>& p1, const std::pair<int, int>& p2) {
+                    return p1.second < p2.second;
+                });
+cout<<"MAXIMO FIRST: "<<max_it->second;
+        MF_R.first=max_it->first;
+        MF_R.second=max_it->second;
+
+        //sort(histo_R.begin(),histo_R.end());
 
         return histo_R;
 }
@@ -233,6 +260,20 @@ vector<float> aux;
     return aux;
 }
 
+int Estadisticos::IntenMediaTotal()
+{
+    int acum=0;
+
+    for(auto &x: Vec)
+    {
+            acum+=x.getIntensidadGris();
+    }
+
+
+    return acum/Vec.size();
+
+}
+
 //Maximos y Minimos
 
 float Estadisticos::Max_Intensidad()
@@ -340,11 +381,13 @@ float Estadisticos::Min_B()
 
 void Estadisticos::Ordenar()
 {
+
     for(int i=0;i<Datos.getAlto();++i)
     {
-        for(int j=0;j<Datos.getAncho();++j)
+       for(int j=0;j<Datos.getAncho();++j)
         {
-            Vec.push_back(Datos.getPixel(i,j));
+            Vec.push_back(Datos.getPixel(0,0));
+
         }
     }
 
@@ -363,9 +406,15 @@ const vector<Pixel> &Estadisticos::getVec() const
     return Vec;
 }
 
+const pair<unsigned int, unsigned int> &Estadisticos::getMF_R() const
+{
+    return MF_R;
+}
+
 
 void Estadisticos::setDatos(const Imagen &newDatos)
 {
     Datos = newDatos;
-    this->Ordenar();
+    Ordenar();
+
 }

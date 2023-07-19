@@ -14,8 +14,8 @@ class Estadisticos
 public:
     Estadisticos();
 //histogramas
-    map<float,int> Hist_intensidad();
-    map<float,int> Hist_R();
+    map<int,int> Hist_intensidad();
+    map<int,int> Hist_R();
     map<float,int> Hist_G();
     map<float,int> Hist_B();
 
@@ -33,6 +33,9 @@ public:
     float MedianaG();
     float MedianaB();
     vector<float> DesvioSTD();
+    int IntenMediaTotal();
+
+
 
 //maximos y minimos
     float Max_Intensidad();
@@ -54,9 +57,17 @@ public:
 
     const vector<Pixel> &getVec() const;
 
+
+
+
+    const pair<unsigned int, unsigned int> &getMF_R() const;
+
 private:
     Imagen Datos;
     vector<Pixel> Vec;
+    pair<unsigned int, unsigned int> MF_R;
+    pair<unsigned int, unsigned int> MF_G;
+    pair<unsigned int, unsigned int> MG_B;
 
 };
 
