@@ -3,15 +3,6 @@
 // add necessary includes here
 #include <vector>
 #include <string>
-#include "../gestordearchivos.h"
-#include "../gestordearchivospnm.h"
-#include "../gestordearchivosaic.h"
-#include "../imagen.h"
-#include "../pixel.h"
-#include "../estadisticos.h"
-#include "../filtro.h"
-#include "../filtropap.h"
-#include "../filtroespacial.h"
 #include "../sistema.h"
 
 

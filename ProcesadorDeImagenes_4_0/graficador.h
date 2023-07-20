@@ -22,6 +22,8 @@ public:
     Graficador();
      void mostrar(int pAncho, int pAlto, QApplication *pPtrApp);
      void setImagen(const Imagen &newImagen);
+     void algoritmoPintor(int pFil,int pCol);
+
 
 
 
@@ -38,7 +40,17 @@ protected:
 
 private:
      Imagen imagen;
+     Imagen imagenOriginal;
      bool histo=false;
+     void pintarRecursivo(int pFil,int pCol);
+     void pintar();
+     int maxVal;
+     int tolerancia=50;
+     vector<vector<bool>> mask;
+     Pixel pixInicioPintado;
+     int columnaInicial;
+     int filaInicial;
+     int contador;
 
 };
 

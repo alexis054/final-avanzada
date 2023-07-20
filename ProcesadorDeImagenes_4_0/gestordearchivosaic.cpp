@@ -10,7 +10,7 @@ Imagen GestorDeArchivosAIC::Cargar()
 
 }
 
-void GestorDeArchivosAIC::Guardar()
+void GestorDeArchivosAIC::Guardar(string pNombre,string pFormato, Imagen &pImagen)
 {
 
 }

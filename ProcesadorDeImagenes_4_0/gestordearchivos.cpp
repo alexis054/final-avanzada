@@ -10,7 +10,7 @@ Imagen GestorDeArchivos::Cargar()
 
 }
 
-void GestorDeArchivos::Guardar()
+void GestorDeArchivos::Guardar(string pNombre,string pFormato, Imagen &pImagen)
 {
 
 }

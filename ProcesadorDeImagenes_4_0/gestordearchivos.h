@@ -15,7 +15,7 @@ public:
 //metodos virtuales
 
     Imagen virtual Cargar();
-    void virtual Guardar();
+    void virtual Guardar(string pNombre,string pFormato, Imagen &pImagen);
     virtual ~GestorDeArchivos(){};
 
  };

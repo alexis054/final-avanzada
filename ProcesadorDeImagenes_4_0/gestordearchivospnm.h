@@ -7,7 +7,7 @@ class GestorDeArchivosPNM : public GestorDeArchivos
 public:
     GestorDeArchivosPNM(string pRuta);
     Imagen Cargar() override;
-    void Guardar() override;
+    void Guardar(string pNombre,string pFormato, Imagen &pImagen) override;
 private:
     string Ruta;
 };

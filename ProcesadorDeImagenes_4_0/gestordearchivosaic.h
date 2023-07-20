@@ -8,7 +8,7 @@ public:
     GestorDeArchivosAIC(string pRuta);
 
     Imagen virtual Cargar() override;
-    void  virtual Guardar() override;
+    void  virtual Guardar(string pNombre,string pFormato, Imagen &pImagen) override;
 
 
 private:

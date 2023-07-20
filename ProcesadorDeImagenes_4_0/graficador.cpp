@@ -2,7 +2,7 @@
 
 Graficador::Graficador()
 {
-
+     srand(time(0));
 }
 
 
@@ -52,79 +52,112 @@ void Graficador::resizeGL(int w, int h)
 
 void Graficador::paintGL()
 {
-    Pixel pix;
-    float R,G,B;
-    int M=imagen.getM();
+
 
     resizeGL(width(),height());
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glPushMatrix();
+   // glPushMatrix();
+//
+      //      glTranslatef(0,imagen.getAlto(),0);
+       //     glScalef(1,-1,1);
 
-            glTranslatef(0,imagen.getAlto(),0);
-            glScalef(1,-1,1);
+//     glBegin(GL_QUADS);
 
-     glBegin(GL_QUADS);
+//     //imagen
+//    for( int f=0;f<imagen.getAlto();++f)
 
-     //imagen
-    for( int f=0;f<imagen.getAlto();++f)
+//     {
+//         for( int c=0;c<imagen.getAncho();++c)
+//         {
 
-     {
-         for( int c=0;c<imagen.getAncho();++c)
-         {
+//           pix=imagen.getPixel(f,c);
 
-           pix=imagen.getPixel(f,c);
-
-           R=(float)pix.getR()/(float)M;
-           G=(float)pix.getG()/(float)M;
-           B=(float)pix.getB()/(float)M;
-
-
-             glColor3f(R,G,B);
-             glVertex3f(c,f,0);
-             glVertex3f(c,f+1,0);
-             glVertex3f(c+1,f+1,0);
-             glVertex3f(c+1,f ,0);
-
-         }
-      }
-    glEnd();
-
-   //DibujarHistograma();
-
-    glPopMatrix();
+//           R=(float)pix.getR()/(float)M;
+//           G=(float)pix.getG()/(float)M;
+//           B=(float)pix.getB()/(float)M;
 
 
+//             glColor3f(R,G,B);
+//             glVertex3f(c,f,0);
+//             glVertex3f(c,f+1,0);
+//             glVertex3f(c+1,f+1,0);
+//             glVertex3f(c+1,f ,0);
 
+//         }
+//      }
+//    glEnd();
 
+   // glPopMatrix();
 
+    DibujarHistograma();
 
-    glEnd();
+   // glEnd();
 }
 
 void Graficador::DibujarHistograma()
 {
 
-    Estadisticos stat;
-    cout<<"histo";
-    stat.setDatos(imagen);
-    vector<Pixel> Vec = stat.getVec();
+//    Estadisticos stat;
+//    cout<<"histo";
+//    stat.setDatos(imagen);
+//    vector<Pixel> Vec = stat.getVec();
 
 
-      glClear( GL_COLOR_BUFFER_BIT );
-      glPushMatrix();
+//      glClear( GL_COLOR_BUFFER_BIT );
+//      glPushMatrix();
 
-    glBegin(GL_LINE_STRIP);
-    glLineWidth(3.0);
-    for(auto &x: Vec)
-    {
-        glColor3f(1,0,0);
-        glVertex2f(x.getR()*255.0f,stat.Hist_R()[x.getR()*255.0f]);
+//    glBegin(GL_LINE_STRIP);
+//    glLineWidth(3.0);
 
-    }
+//    for(unsigned int i=0;i<Vec.size();++i)
+//    {
+//        glColor3f(1,0,0);
+//        glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
+
+
+//    }
+
+    Pixel pix;
+    float R,G,B;
+    int M=imagen.getM();
+
+     glPushMatrix();
+
+             glTranslatef(0,imagen.getAlto(),0);
+             glScalef(1,-1,1);
+
+      glBegin(GL_QUADS);
+
+      //imagen
+     for( int f=0;f<imagen.getAlto();++f)
+
+      {
+          for( int c=0;c<imagen.getAncho();++c)
+          {
+
+            pix=imagen.getPixel(f,c);
+
+            R=(float)pix.getR()/(float)M;
+            G=(float)pix.getG()/(float)M;
+            B=(float)pix.getB()/(float)M;
+
+
+              glColor3f(R,G,B);
+              glVertex3f(c,f,0);
+              glVertex3f(c,f+1,0);
+              glVertex3f(c+1,f+1,0);
+              glVertex3f(c+1,f ,0);
+
+          }
+       }
+     glEnd();
+
+     glPopMatrix();
+
     glEnd();
  glPopMatrix();
- cout<<"histo";
+
  /*   setWindowTitle(
                 "Histograma. Maxima Frecuencia(MF)de Intensidad(I): "+ QString::fromStdString(to_string(maxFrecI))+
                 " MF Intesidad: "  + QString::fromStdString(to_string(int(IdeMFI))) +
@@ -196,13 +229,85 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
 
 void Graficador::mousePressEvent(QMouseEvent *pEvent)
 {
+    //Creo un bool que indica si Ctrl y ClickIzquierdo fueron presionados al mismo tiempo
+    bool ctrlAndClickIzq = pEvent->modifiers()& Qt::ControlModifier &&
+                           pEvent->button() == Qt::LeftButton;
 
+    if (ctrlAndClickIzq)
+    {
+        //Si Ctrl y ClickIzquierdofueron presionados, entonces guardo la posición del cursor
+
+        columnaInicial = this->mapFromGlobal(QCursor::pos()).x();
+        filaInicial = this->mapFromGlobal(QCursor::pos()).y();
+    }
 }
 
 
 
 void Graficador::mouseReleaseEvent(QMouseEvent *pEvent)
 {
+    bool releaseCtrlAndClickIzq = pEvent->modifiers()& Qt::ControlModifier && pEvent->MouseButtonRelease;
 
+    if(releaseCtrlAndClickIzq)
+    {
+        algoritmoPintor(  columnaInicial,filaInicial);
+
+        repaint();
+    }
+}
+
+
+void Graficador::algoritmoPintor(int pFil, int pCol)
+{
+    mask.clear();
+    mask.resize(imagen.getAlto(),vector<bool>(imagen.getAncho(),false));//dimensiono la mascara de la imagen
+    pixInicioPintado=imagen.getPixel(pFil,pCol);
+    pintarRecursivo(pFil,pCol);
+    pintar();
+}
+
+void Graficador::pintar()
+{
+    contador = 0;
+    int R,G,B;
+
+    R=0;
+    G=0;
+    B=imagen.getM();
+
+    for(int i=0;i<imagen.getAlto();++i)
+    {
+        for(int j=0;j<imagen.getAncho();++j)
+        {
+            if(mask[i][j])
+            {
+                imagen.ModificarPixelTerna(i,j,R,G,B);
+            }
+        }
+    }
+}
+
+
+void Graficador::pintarRecursivo(int pFila, int pCol)
+{
+        if(pFila < imagen.getAlto() && pCol < imagen.getAncho()
+                && pFila>0 && pCol>0)
+        {
+            ;
+            int aux;
+            aux=pixInicioPintado.intensidad()-imagen.getPixel(pFila,pCol).intensidad();
+
+            if(aux < tolerancia and mask[pFila][pCol]!=true and contador<10000)
+            {
+                mask [pFila] [pCol] = true;
+                //Incrementa los pixeles contados
+                ++contador;
+                //Revisa la vecindad del pixel
+                pintarRecursivo(pFila+1, pCol);
+                pintarRecursivo(pFila-1, pCol);
+                pintarRecursivo(pFila,   pCol+1);
+                pintarRecursivo(pFila,   pCol-1);
+            }
+        }
 }
 
