@@ -44,8 +44,9 @@ private:
      bool histo=false;
      void pintarRecursivo(int pFil,int pCol);
      void pintar();
-     int maxVal;
-     int tolerancia=50;
+     float dela_intensidad=0.0;
+     float getIntensidadpix(Pixel pix);
+     float tolerancia=10;
      vector<vector<bool>> mask;
      Pixel pixInicioPintado;
      int columnaInicial;

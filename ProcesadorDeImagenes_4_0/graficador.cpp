@@ -239,6 +239,8 @@ void Graficador::mousePressEvent(QMouseEvent *pEvent)
 
         columnaInicial = this->mapFromGlobal(QCursor::pos()).x();
         filaInicial = this->mapFromGlobal(QCursor::pos()).y();
+
+
     }
 }
 
@@ -250,7 +252,7 @@ void Graficador::mouseReleaseEvent(QMouseEvent *pEvent)
 
     if(releaseCtrlAndClickIzq)
     {
-        algoritmoPintor(  columnaInicial,filaInicial);
+        algoritmoPintor( filaInicial,columnaInicial);
 
         repaint();
     }
@@ -259,49 +261,59 @@ void Graficador::mouseReleaseEvent(QMouseEvent *pEvent)
 
 void Graficador::algoritmoPintor(int pFil, int pCol)
 {
-    mask.clear();
+    mask.clear();//limpio la mascara
     mask.resize(imagen.getAlto(),vector<bool>(imagen.getAncho(),false));//dimensiono la mascara de la imagen
-    pixInicioPintado=imagen.getPixel(pFil,pCol);
-    pintarRecursivo(pFil,pCol);
-    pintar();
+
+    pixInicioPintado=imagen.getPixel(pFil,pCol);//asigno el pixel inicial
+    pintarRecursivo(pFil,pCol);//llamo a pintar recursivo para dar valores a mascara
+    pintar();//pinto
 }
 
 void Graficador::pintar()
 {
-    contador = 0;
+    contador = 0;//inicializo contador para que no haya buffer overflow
     int R,G,B;
 
     R=0;
     G=0;
-    B=imagen.getM();
+    B=255;//asigno un color para pintar
 
-    for(int i=0;i<imagen.getAlto();++i)
+    for(int i=0;i<imagen.getAlto();++i)//recorro la imagen
     {
         for(int j=0;j<imagen.getAncho();++j)
         {
-            if(mask[i][j])
+            if(mask[i][j])//si la mascara es verdadera
             {
-                imagen.ModificarPixelTerna(i,j,R,G,B);
+                imagen.ModificarPixelTerna(i,j,R,G,B);//pinto los pixeles que me indique la mascara
             }
         }
     }
 }
 
+float Graficador::getIntensidadpix(Pixel pix)
+{
+    float intensidad=0.0;
+
+    intensidad=sqrt(
+            pow((pixInicioPintado.getR())-(pix.getR()),2)+
+            pow((pixInicioPintado.getG())-(pix.getG()),2)+
+            pow((pixInicioPintado.getB())-(pix.getB()),2));
+    cout<<"Intensidad:  "<<intensidad;
+    return intensidad;
+}
+
 
 void Graficador::pintarRecursivo(int pFila, int pCol)
 {
-        if(pFila < imagen.getAlto() && pCol < imagen.getAncho()
-                && pFila>0 && pCol>0)
+        if(pFila < imagen.getAlto() && pCol < imagen.getAncho()  //controlo que filas y columnas esten dentro de
+                && pFila>0 && pCol>0)                            //rango
         {
-            ;
-            int aux;
-            aux=pixInicioPintado.intensidad()-imagen.getPixel(pFila,pCol).intensidad();
+            if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<1000) //si la diferencia de intensidades
+            {                                                                   //es menor a una tolerancia y si el contador es
+                mask [pFila] [pCol] = true; //mascara verdadero (pinto)                // menor a un valor para que el programa no crashee
 
-            if(aux < tolerancia and mask[pFila][pCol]!=true and contador<10000)
-            {
-                mask [pFila] [pCol] = true;
-                //Incrementa los pixeles contados
-                ++contador;
+                ++contador;// aumento el contador
+
                 //Revisa la vecindad del pixel
                 pintarRecursivo(pFila+1, pCol);
                 pintarRecursivo(pFila-1, pCol);
