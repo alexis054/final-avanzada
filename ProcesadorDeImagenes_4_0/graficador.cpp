@@ -276,7 +276,7 @@ void Graficador::pintar()
 
     R=0;
     G=0;
-    B=255;//asigno un color para pintar
+    B=imagen.getM();//asigno un color para pintar
 
     for(int i=0;i<imagen.getAlto();++i)//recorro la imagen
     {
@@ -308,7 +308,7 @@ void Graficador::pintarRecursivo(int pFila, int pCol)
         if(pFila < imagen.getAlto() && pCol < imagen.getAncho()  //controlo que filas y columnas esten dentro de
                 && pFila>0 && pCol>0)                            //rango
         {
-            if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<1000) //si la diferencia de intensidades
+            if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<10000) //si la diferencia de intensidades
             {                                                                   //es menor a una tolerancia y si el contador es
                 mask [pFila] [pCol] = true; //mascara verdadero (pinto)                // menor a un valor para que el programa no crashee
 
@@ -316,9 +316,13 @@ void Graficador::pintarRecursivo(int pFila, int pCol)
 
                 //Revisa la vecindad del pixel
                 pintarRecursivo(pFila+1, pCol);
+                   pintarRecursivo(pFila+1, pCol+1);
                 pintarRecursivo(pFila-1, pCol);
+                   pintarRecursivo(pFila-1, pCol-1);
                 pintarRecursivo(pFila,   pCol+1);
                 pintarRecursivo(pFila,   pCol-1);
+                   pintarRecursivo(pFila+1, pCol-1);
+                      pintarRecursivo(pFila-1, pCol+1);
             }
         }
 }

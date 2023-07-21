@@ -46,7 +46,7 @@ private:
      void pintar();
      float dela_intensidad=0.0;
      float getIntensidadpix(Pixel pix);
-     float tolerancia=10;
+     float tolerancia=50;
      vector<vector<bool>> mask;
      Pixel pixInicioPintado;
      int columnaInicial;
