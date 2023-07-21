@@ -4,6 +4,7 @@
 #include "filtro.h"
 #include "filtroespacial.h"
 #include "filtropap.h"
+#include "lut.h"
 #include <QApplication>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
@@ -52,7 +53,7 @@ private:
      int columnaInicial;
      int filaInicial;
      int contador;
-
+     Lut lut;
 };
 
 #endif // GRAFICADOR_H

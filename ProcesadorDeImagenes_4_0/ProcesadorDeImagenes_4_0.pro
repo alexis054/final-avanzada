@@ -24,6 +24,7 @@ SOURCES += \
         graficador.cpp \
         imagen.cpp \
         interfaz.cpp \
+        lut.cpp \
         main.cpp \
         pixel.cpp \
         sistema.cpp
@@ -44,5 +45,6 @@ HEADERS += \
     graficador.h \
     imagen.h \
     interfaz.h \
+    lut.h \
     pixel.h \
     sistema.h

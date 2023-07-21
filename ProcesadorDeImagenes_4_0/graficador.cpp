@@ -223,6 +223,20 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
          repaint();
      }
 
+     if(ctrl_and_one)
+     {
+         lut.cargar(1);
+         lut.modificarimg(imagen);
+         repaint();
+     }
+
+     if(ctrl_and_two)
+     {
+         lut.cargar(2);
+         lut.modificarimg(imagen);
+         repaint();
+     }
+
 
 }
 
@@ -298,7 +312,7 @@ float Graficador::getIntensidadpix(Pixel pix)
             pow((pixInicioPintado.getR())-(pix.getR()),2)+
             pow((pixInicioPintado.getG())-(pix.getG()),2)+
             pow((pixInicioPintado.getB())-(pix.getB()),2));
-    cout<<"Intensidad:  "<<intensidad;
+
     return intensidad;
 }
 
@@ -316,13 +330,13 @@ void Graficador::pintarRecursivo(int pFila, int pCol)
 
                 //Revisa la vecindad del pixel
                 pintarRecursivo(pFila+1, pCol);
-                   pintarRecursivo(pFila+1, pCol+1);
+                pintarRecursivo(pFila+1, pCol+1);
                 pintarRecursivo(pFila-1, pCol);
-                   pintarRecursivo(pFila-1, pCol-1);
+                pintarRecursivo(pFila-1, pCol-1);
                 pintarRecursivo(pFila,   pCol+1);
                 pintarRecursivo(pFila,   pCol-1);
-                   pintarRecursivo(pFila+1, pCol-1);
-                      pintarRecursivo(pFila-1, pCol+1);
+                pintarRecursivo(pFila+1, pCol-1);
+                pintarRecursivo(pFila-1, pCol+1);
             }
         }
 }
