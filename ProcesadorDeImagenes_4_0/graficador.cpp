@@ -75,12 +75,6 @@ void Graficador::resizeGL(int w, int h)
 
 void Graficador::paintGL()
 {
-
-    Pixel pix;
-    float R,G,B;
-    int M=imagen.getM();
-
-    //resizeGL(width(),height());
     glClear(GL_COLOR_BUFFER_BIT);
 
     relacionAncho=(float)width()/(float)imagen.getAncho();
@@ -104,51 +98,19 @@ void Graficador::paintGL()
 
 //---------------------------------grafico
 
-    glPushMatrix();
+  if(histo==false)
+    DibujarImagen();
+  else
+    DibujarHistograma();
 
 
-    glTranslatef(dx,dy,0.0f);
-    glScalef(escala,escala,1.0f);
-
-     glBegin(GL_QUADS);
-
-     //imagen
-    for( int f=0;f<imagen.getAlto();++f)
-     {
-         for( int c=0;c<imagen.getAncho();++c)
-         {
-
-           pix=imagen.getPixel(f,c);
-
-           R=(float)pix.getR()/(float)M;
-           G=(float)pix.getG()/(float)M;
-           B=(float)pix.getB()/(float)M;
-
-
-            glColor3f(R,G,B);
-
-
-           glVertex2i(c, imagen.getAlto()-f);
-           glVertex2i(c, imagen.getAlto()-(f+1));
-           glVertex2i(c+1, imagen.getAlto()-(f+1));
-           glVertex2i(c+1, imagen.getAlto()-f);
-
-         }
-      }
-    glEnd();
-
-    glPopMatrix();
-    setWindowTitle(listaDeArchivos[indice].c_str());
-   // DibujarHistograma();
-
-   // glEnd();
 }
 
 void Graficador::DibujarHistograma()
 {
 
     Estadisticos stat;
-    cout<<"histo";
+
    stat.setDatos(imagen);
    vector<Pixel> Vec = stat.getVec();
 
@@ -162,23 +124,10 @@ void Graficador::DibujarHistograma()
    for(unsigned int i=0;i<Vec.size();++i)
    {
        glColor3f(1,0,0);
-        glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
+       glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
     }
-
-
-
- /*   setWindowTitle(
-                "Histograma. Maxima Frecuencia(MF)de Intensidad(I): "+ QString::fromStdString(to_string(maxFrecI))+
-                " MF Intesidad: "  + QString::fromStdString(to_string(int(IdeMFI))) +
-                " Rango de I:[ 0 , "  + QString::fromStdString(to_string(int(maxRangoDinamico))) +" ]"+
-                " MF Rojo: "  + QString::fromStdString(to_string(maxFrecR)) +
-                " , I de MF Rojo: "  + QString::fromStdString(to_string(int(IdeMFR))) +
-                " MF Verde: "        + QString::fromStdString(to_string(maxFrecG)) +
-                " ,I deMF Verde: "  + QString::fromStdString(to_string(int(IdeMFG))) +
-                " MF Azul: "        + QString::fromStdString(to_string(maxFrecB)) +
-                " ,I de MF Azul: "  + QString::fromStdString(to_string(int(IdeMFB))) );
-
-*/
+   glPopMatrix();
+   glEnd();
 }
 //----------------------------------------------------------------------------------------------------------------------------
 //Eventos
@@ -285,13 +234,13 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
 
      if(ctrl_and_plus)
      {
-         filtroPaP.Brillo(imagen);
+         filtroPaP.AumentarBrillo(imagen);
          repaint();
      }
 
      if(ctrl_and_minus)
      {
-         filtroPaP.Brillo(imagen);
+         filtroPaP.DisminuirBrillo(imagen);
          repaint();
      }
 
@@ -405,6 +354,50 @@ float Graficador::getIntensidadpix(Pixel pix)
             pow((pixInicioPintado.getB())-(pix.getB()),2));
 
     return intensidad;
+}
+
+void Graficador::DibujarImagen()
+{
+
+    Pixel pix;
+    float R,G,B;
+    int M=imagen.getM();
+
+    glPushMatrix();
+
+
+    glTranslatef(dx,dy,0.0f);
+    glScalef(escala,escala,1.0f);
+
+     glBegin(GL_QUADS);
+
+     //imagen
+    for( int f=0;f<imagen.getAlto();++f)
+     {
+         for( int c=0;c<imagen.getAncho();++c)
+         {
+
+           pix=imagen.getPixel(f,c);
+
+           R=(float)pix.getR()/(float)M;
+           G=(float)pix.getG()/(float)M;
+           B=(float)pix.getB()/(float)M;
+
+
+            glColor3f(R,G,B);
+
+
+           glVertex2i(c, imagen.getAlto()-f);
+           glVertex2i(c, imagen.getAlto()-(f+1));
+           glVertex2i(c+1, imagen.getAlto()-(f+1));
+           glVertex2i(c+1, imagen.getAlto()-f);
+
+         }
+      }
+    glEnd();
+
+    glPopMatrix();
+    setWindowTitle(listaDeArchivos[indice].c_str());
 }
 
 

@@ -8,7 +8,8 @@ class FiltroPaP : public Filtro
 public:
     FiltroPaP();
 
-    void Brillo(Imagen &pImagen);
+    void AumentarBrillo(Imagen &pImagen);
+    void DisminuirBrillo(Imagen &pImagen);
     void Contraste(Imagen &pImagen);
     void Binarizar (Imagen &pImagen);
 

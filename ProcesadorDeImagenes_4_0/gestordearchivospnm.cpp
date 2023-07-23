@@ -122,7 +122,7 @@ Imagen GestorDeArchivosPNM::Cargar()
                     for(int j=0;j<columnas;++j)
                     {
                         archi>>valorPixR>>valorPixG>>valorPixB;
-                        aux.ModificarPixelTerna(i,j,valorPixR/M,valorPixB/M,valorPixG/M);
+                        aux.ModificarPixelTerna(i,j,valorPixR,valorPixG,valorPixB);
                     }
                 }
             }
@@ -225,14 +225,16 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
     ofstream archi;
     string metadatos;
 
-    archi.open(pNombre);
+    archi.open("../ProcesadorDeImagenes_4_0/Nuevas/"+pNombre);
 
     if(archi.is_open())
     {
-        archi<<pFormato<<endl;
-        archi<<pImagen.getMetadatos()<<endl;
-        archi<<pImagen.getAncho()<<" "<<pImagen.getAlto()<<endl;
-        archi<<pImagen.getM();
+        archi<<pFormato<<"\n";
+        archi<<pImagen.getMetadatos()<<"\n";
+        archi<<pImagen.getAncho()<<" "<<pImagen.getAlto()<<"\n";
+
+        if(pFormato!="P1" and pFormato!="P4")
+        archi<<pImagen.getM()<<"\n";
 
     }
     if(pFormato=="P1")
@@ -243,7 +245,7 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
         {
             for(int j=0;j<pImagen.getAncho();++j)
             {
-                auxMono=pImagen.getPixel(i,j).intensidad();
+                auxMono=pImagen.getPixel(i,j).getR();
 
                 if(auxMono!=0)
                 {
@@ -261,9 +263,9 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
         {
             for(int j=0;j<pImagen.getAncho();++j)
             {
-                archi<<pImagen.getPixel(i,j).intensidad()<<" ";
-                archi<<"\n";
+                archi<<pImagen.getPixel(i,j).intensidad()<<" ";    
             }
+           archi<<"\n";
         }
         archi.close();
     }
@@ -279,7 +281,6 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
                 archi<<pImagen.getPixel(i,j).getG()<<" ";
                 archi<<pImagen.getPixel(i,j).getB()<<" ";
             }
-
             archi<<"\n";
         }
         archi.close();
@@ -290,12 +291,10 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
     if(pFormato=="P4" or pFormato=="P5" or pFormato=="P6")
     {
         int pos=0;
-        pos=archi.tellp();
         archi.close();
 
-        archi.open(pNombre, ios::binary);
-        archi.seekp(pos);
-
+        archi.open("../ProcesadorDeImagenes_4_0/Nuevas/"+pNombre, ios::binary|ios::app|ios::out);
+//
 
         if(pFormato=="P4")
         {
@@ -344,9 +343,9 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
                 for (int j= 0; j < pImagen.getAncho(); ++j)
                 {
 
-                    valorCanalR=pImagen.getPixel(i,j).getR();
-                    valorCanalR=pImagen.getPixel(i,j).getG();
-                    valorCanalR=pImagen.getPixel(i,j).getB();
+                    valorCanalR=(char)pImagen.getPixel(i,j).getR();
+                    valorCanalG=(char)pImagen.getPixel(i,j).getG();
+                    valorCanalB=(char)pImagen.getPixel(i,j).getB();
 
                     archi.write((char*)&valorCanalR, sizeof(valorCanalR));
                     archi.write((char*)&valorCanalG, sizeof(valorCanalG));

@@ -51,8 +51,6 @@ map<int,int> Estadisticos::Hist_R()
         MF_R.first=max_it->first;
         MF_R.second=max_it->second;
 
-        //sort(histo_R.begin(),histo_R.end());
-
         return histo_R;
 }
 
@@ -60,10 +58,22 @@ map<int,int> Estadisticos::Hist_G()
 {
     map<int,int>histo_G;
 
-    for(auto &x:Vec)
-    {
-        histo_G[x.getG()*255.0f]++;
-    }
+    for( int i = 0; i < Datos.getM()-1 ; i++)
+     {
+         histo_G.insert(make_pair(i,0));
+     }
+    for(unsigned int i=0;i<Vec.size();++i)
+     {
+         histo_G[(int)(Vec[i].getG())]=histo_G[Vec[i].getG()]+1;
+     }
+    auto max_it = std::max_element(histo_G.begin(), histo_G.end(),
+            [](const std::pair<int, int>& p1, const std::pair<int, int>& p2) {
+                return p1.second < p2.second;
+            });
+
+    MF_G.first=max_it->first;
+    MF_G.second=max_it->second;
+
 
     return histo_G;
 }
@@ -72,10 +82,22 @@ map<int,int> Estadisticos::Hist_B()
 {
     map<int,int>histo_B;
 
-    for(auto &x:Vec)
-    {
-        histo_B[x.getB()*255.0f]++;
-    }
+    for( int i = 0; i < Datos.getM()-1 ; i++)
+     {
+         histo_B.insert(make_pair(i,0));
+     }
+    for(unsigned int i=0;i<Vec.size();++i)
+     {
+         histo_B[(int)(Vec[i].getR())]=histo_B[Vec[i].getR()]+1;
+     }
+    auto max_it = std::max_element(histo_B.begin(), histo_B.end(),
+            [](const std::pair<int, int>& p1, const std::pair<int, int>& p2) {
+                return p1.second < p2.second;
+            });
+
+    MF_B.first=max_it->first;
+    MF_B.second=max_it->second;
+
 
     return histo_B;
 }

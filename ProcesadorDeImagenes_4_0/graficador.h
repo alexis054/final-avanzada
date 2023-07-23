@@ -76,6 +76,7 @@ private:
      void pintarRecursivo(int pFil,int pCol);
      void pintar();   
      float getIntensidadpix(Pixel pix);
+     void DibujarImagen();
 
 
 

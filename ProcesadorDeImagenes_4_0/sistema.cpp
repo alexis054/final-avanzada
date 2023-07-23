@@ -38,7 +38,7 @@ void Sistema::ejecutar(QApplication *pPtrApp)
         }
         case 5:
         {
-            Dir = raiz + "imagenes_Modificadas/";
+            Dir = raiz + "Nuevas/";
             break;
         }
         case 6:

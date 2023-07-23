@@ -30,24 +30,30 @@ Imagen GestorDeArchivosAIC::Cargar()
         archi>>columnas>>filas;
         aux.setAlto(filas);
         aux.setAncho(columnas);
+        aux.ReservarMemoria();
 
         archi>>M;
         aux.setM(M);
 
         int col=0;
+
         for(int i=0;i<filas;++i)
         {
             while(col<columnas)
             {
                 archi>>Gris>>Repeticiones;
 
+
                 for(int j=0;j<Repeticiones;++j)
                 {
                     aux.ModificarPixelTerna(i,col+j,Gris,Gris,Gris);
                 }
 
-             col=0;
+            col=col+Repeticiones;
+
             }
+
+            col=0;
         }
 
     archi.close();
@@ -66,7 +72,7 @@ void GestorDeArchivosAIC::Guardar(string pNombre,string pFormato, Imagen &pImage
    int Gris1;
    int Gris2;
 
-   archi.open(pNombre);
+   archi.open("../ProcesadorDeImagenes_4_0/Nuevas/"+pNombre);
    if(archi.is_open())
    {
        archi<<pFormato<<"\n";
@@ -98,6 +104,8 @@ void GestorDeArchivosAIC::Guardar(string pNombre,string pFormato, Imagen &pImage
                    count=1;
                }
            }
+           archi<<"\n";
+           count=1;
        }
    archi.close();
    }
