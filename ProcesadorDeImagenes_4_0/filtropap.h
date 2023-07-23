@@ -14,7 +14,8 @@ public:
 
 
 private:
-    float db=0.1;//valor arbitrario, diferencial brillo
+    float db=10;//valor arbitrario, diferencial brillo
+    int maximo= 254;
 
 };
 

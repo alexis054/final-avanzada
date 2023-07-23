@@ -200,7 +200,13 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
     bool ctrl_and_one=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_1;
     bool ctrl_and_two=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_2;
     bool ctrl_and_x=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_X;
+    bool ctrl_and_b=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_B;
 
+    if(ctrl_and_b)
+    {
+        filtroPaP.Binarizar(imagen);
+        repaint();
+    }
 
     if(ctrl_and_x)
     {

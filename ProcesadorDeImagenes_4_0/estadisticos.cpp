@@ -331,6 +331,7 @@ int Estadisticos::Min_R()
             min=Vec[i].getR();
 
     }
+    //cout<<min;
     return min;
 }
 
