@@ -2,6 +2,7 @@
 #define INTERFAZ_H
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -9,13 +10,13 @@ class Interfaz
 {
 public:
     Interfaz();
-    void getDir();
     void getKeyBindings();
 
 
     string getNombreNueva();
     string getFormatoNueva();
     void mostrarDir();
+    void mostrarListaImagenes(vector<string> pLista);
 
     int getOpcion() const;
     void setOpcion(int newOpcion);

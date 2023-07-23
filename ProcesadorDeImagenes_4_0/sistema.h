@@ -17,7 +17,7 @@ public:
 
     void setDir(string pRutaDir);//se encarga de obtener los nombres de los  archivos de un directorio
 
-    void setSubDir(string pRuta);//hace un barrido de directorios y guarda los  archivos en esa ruta
+    void setListadoDeArchivos(string pRuta);//hace un barrido de directorios y guarda los  archivos en esa ruta
 
     vector<string> getListaDeArchivos();//para acceder a lista de nombre de archivos
 
@@ -31,6 +31,7 @@ private:
     vector <string> listaDeArchivos;
     string Dir;
     Interfaz ui;
+    Graficador graf;
 
 };
 

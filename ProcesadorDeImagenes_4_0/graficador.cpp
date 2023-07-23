@@ -3,21 +3,49 @@
 Graficador::Graficador()
 {
      srand(time(0));
+     indice=0;
+     dx=0.0;
+     dy=0.0;
+     gda=NULL;
+
 }
 
-
-
-void Graficador::mostrar(int pAncho, int pAlto, QApplication *pPtrApp)
+void Graficador::mostrar(QApplication *pPtrApp)
 {
-
-    resize(pAncho,pAlto);
+    resize(imagen.getAncho(),imagen.getAlto());
     show();
     pPtrApp->exec();
 }
 
-void Graficador::setImagen(const Imagen &newImagen)
+void Graficador::setImagen()
 {
-    imagen = newImagen;
+    string nombre;
+    string ruta;
+    string formato;
+    int posicion;
+
+    nombre=listaDeArchivos[indice];
+    ruta=listaRutas[indice];
+    posicion=nombre.find_last_of(".");
+    formato=nombre.substr(posicion);
+
+
+    if(formato == ".pgm" or formato== ".pbm" or formato == ".ppm" or formato == ".pnm")
+    {
+        gda= new GestorDeArchivosPNM(ruta);
+    }
+    if(formato==".aic")
+    {
+        gda = new GestorDeArchivosAIC(ruta);
+    }
+
+    imagen=gda->Cargar();
+    imagenOriginal=imagen;
+
+    delete gda;
+
+    setWindowTitle(nombre.c_str()); //casteo
+
 }
 
 
@@ -38,14 +66,9 @@ void Graficador::resizeGL(int w, int h)
     xmin=-10;            xmax=10;
     ymin=-10;           ymax=10;
     zmin=-1;            zmax=1;
-    if(imagen.getAlto()>0)
-    {
-        xmax=imagen.getAncho()+10;
-        ymax=imagen.getAlto()+10;
 
-    }
 
-    glOrtho(xmin,xmax,ymin,ymax,zmin,zmax);
+    glOrtho(xmin,w+xmax,ymin,h+ymax,zmin,zmax);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
@@ -53,44 +76,70 @@ void Graficador::resizeGL(int w, int h)
 void Graficador::paintGL()
 {
 
+    Pixel pix;
+    float R,G,B;
+    int M=imagen.getM();
 
-    resizeGL(width(),height());
+    //resizeGL(width(),height());
     glClear(GL_COLOR_BUFFER_BIT);
 
-   // glPushMatrix();
-//
-      //      glTranslatef(0,imagen.getAlto(),0);
-       //     glScalef(1,-1,1);
+    relacionAncho=(float)width()/(float)imagen.getAncho();
+    relacionAlto=(float)height()/(float)imagen.getAlto();
 
-//     glBegin(GL_QUADS);
+    escala=1.0f;
+    dx=0.0f;
+    dy=0.0f;
 
-//     //imagen
-//    for( int f=0;f<imagen.getAlto();++f)
+    if(relacionAncho<relacionAlto)
+    {
+        escala=relacionAncho;
 
-//     {
-//         for( int c=0;c<imagen.getAncho();++c)
-//         {
+        dy=(height()-(float)(imagen.getAlto()*escala))*0.5f;
+    }
+    else
+    {
+        escala=relacionAlto;
+        dx=(width()-(float)(imagen.getAncho()*escala))*0.5f;
+    }
 
-//           pix=imagen.getPixel(f,c);
+//---------------------------------grafico
 
-//           R=(float)pix.getR()/(float)M;
-//           G=(float)pix.getG()/(float)M;
-//           B=(float)pix.getB()/(float)M;
+    glPushMatrix();
 
 
-//             glColor3f(R,G,B);
-//             glVertex3f(c,f,0);
-//             glVertex3f(c,f+1,0);
-//             glVertex3f(c+1,f+1,0);
-//             glVertex3f(c+1,f ,0);
+    glTranslatef(dx,dy,0.0f);
+    glScalef(escala,escala,1.0f);
 
-//         }
-//      }
-//    glEnd();
+     glBegin(GL_QUADS);
 
-   // glPopMatrix();
+     //imagen
+    for( int f=0;f<imagen.getAlto();++f)
+     {
+         for( int c=0;c<imagen.getAncho();++c)
+         {
 
-    DibujarHistograma();
+           pix=imagen.getPixel(f,c);
+
+           R=(float)pix.getR()/(float)M;
+           G=(float)pix.getG()/(float)M;
+           B=(float)pix.getB()/(float)M;
+
+
+            glColor3f(R,G,B);
+
+
+           glVertex2i(c, imagen.getAlto()-f);
+           glVertex2i(c, imagen.getAlto()-(f+1));
+           glVertex2i(c+1, imagen.getAlto()-(f+1));
+           glVertex2i(c+1, imagen.getAlto()-f);
+
+         }
+      }
+    glEnd();
+
+    glPopMatrix();
+    setWindowTitle(listaDeArchivos[indice].c_str());
+   // DibujarHistograma();
 
    // glEnd();
 }
@@ -98,65 +147,25 @@ void Graficador::paintGL()
 void Graficador::DibujarHistograma()
 {
 
-//    Estadisticos stat;
-//    cout<<"histo";
-//    stat.setDatos(imagen);
-//    vector<Pixel> Vec = stat.getVec();
+    Estadisticos stat;
+    cout<<"histo";
+   stat.setDatos(imagen);
+   vector<Pixel> Vec = stat.getVec();
 
 
-//      glClear( GL_COLOR_BUFFER_BIT );
-//      glPushMatrix();
-
-//    glBegin(GL_LINE_STRIP);
-//    glLineWidth(3.0);
-
-//    for(unsigned int i=0;i<Vec.size();++i)
-//    {
-//        glColor3f(1,0,0);
-//        glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
-
-
-//    }
-
-    Pixel pix;
-    float R,G,B;
-    int M=imagen.getM();
-
+     glClear( GL_COLOR_BUFFER_BIT );
      glPushMatrix();
 
-             glTranslatef(0,imagen.getAlto(),0);
-             glScalef(1,-1,1);
+   glBegin(GL_LINE_STRIP);
+   glLineWidth(3.0);
 
-      glBegin(GL_QUADS);
-
-      //imagen
-     for( int f=0;f<imagen.getAlto();++f)
-
-      {
-          for( int c=0;c<imagen.getAncho();++c)
-          {
-
-            pix=imagen.getPixel(f,c);
-
-            R=(float)pix.getR()/(float)M;
-            G=(float)pix.getG()/(float)M;
-            B=(float)pix.getB()/(float)M;
+   for(unsigned int i=0;i<Vec.size();++i)
+   {
+       glColor3f(1,0,0);
+        glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
+    }
 
 
-              glColor3f(R,G,B);
-              glVertex3f(c,f,0);
-              glVertex3f(c,f+1,0);
-              glVertex3f(c+1,f+1,0);
-              glVertex3f(c+1,f ,0);
-
-          }
-       }
-     glEnd();
-
-     glPopMatrix();
-
-    glEnd();
- glPopMatrix();
 
  /*   setWindowTitle(
                 "Histograma. Maxima Frecuencia(MF)de Intensidad(I): "+ QString::fromStdString(to_string(maxFrecI))+
@@ -190,31 +199,94 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
     bool ctrl_and_right=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_Right;
     bool ctrl_and_one=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_1;
     bool ctrl_and_two=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_2;
+    bool ctrl_and_x=pEvent->modifiers() & Qt::ControlModifier and pEvent->key() == Qt::Key_X;
 
+
+    if(ctrl_and_x)
+    {
+        imagen=imagenOriginal;
+        repaint();
+    }
+
+    if(ctrl_and_left)
+    {
+        if(indice>0)
+        {
+            indice--;
+            setImagen();
+            repaint();
+        }
+    }
+
+    if(ctrl_and_right)
+    {
+        if(indice<listaDeArchivos.size()-1)
+        {
+            indice++;
+            setImagen();
+            repaint();
+        }
+    }
+
+    if (ctrl_and_g)
+    {
+            gda=NULL;
+            string nombre=ui.getNombreNueva();
+            string formato=ui.getFormatoNueva();
+
+            if(formato=="aic")
+            {
+                gda=new GestorDeArchivosAIC(listaRutas[indice]);
+                nombre += ".aic";
+
+            }
+            else
+            {
+                gda=new GestorDeArchivosPNM(listaRutas[indice]);
+            if(formato=="P1" or formato=="P4")
+            {
+                nombre +=".pbm";
+            }
+            if(formato=="P2" or formato=="P5")
+            {
+                nombre +=".pgm";
+            }
+            if(formato=="P3" or formato=="P6")
+            {
+                nombre +=".ppm";
+            }
+            }
+            gda->Guardar(nombre,formato,imagen);
+    }
 
     if(ctrl_and_s)
     {
         filtroEsp.filtradoSuavizado(imagen);
+        repaint();
     }
 
     if(ctrl_and_m)
     {
         filtroEsp.filtradoMediana(imagen);
+        repaint();
     }
 
      if(ctrl_and_c)
       {
           filtroPaP.Contraste(imagen);
+          repaint();
       }
 
      if(ctrl_and_plus)
      {
          filtroPaP.Brillo(imagen);
+         repaint();
      }
 
      if(ctrl_and_minus)
      {
          filtroPaP.Brillo(imagen);
+         repaint();
      }
 
      if(ctrl_and_h)
@@ -225,6 +297,7 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
 
      if(ctrl_and_one)
      {
+         imagen=imagenOriginal;
          lut.cargar(1);
          lut.modificarimg(imagen);
          repaint();
@@ -232,6 +305,7 @@ void Graficador::keyPressEvent(QKeyEvent *pEvent)
 
      if(ctrl_and_two)
      {
+         imagen=imagenOriginal;
          lut.cargar(2);
          lut.modificarimg(imagen);
          repaint();
@@ -270,6 +344,17 @@ void Graficador::mouseReleaseEvent(QMouseEvent *pEvent)
 
         repaint();
     }
+}
+
+void Graficador::setListaRutas(const vector<string> &newListaRutas)
+{
+    listaRutas = newListaRutas;
+}
+
+void Graficador::setListaDeArchivos(const vector<string> &newListaDeArchivos)
+{
+    listaDeArchivos = newListaDeArchivos;
+
 }
 
 
@@ -322,7 +407,7 @@ void Graficador::pintarRecursivo(int pFila, int pCol)
         if(pFila < imagen.getAlto() && pCol < imagen.getAncho()  //controlo que filas y columnas esten dentro de
                 && pFila>0 && pCol>0)                            //rango
         {
-            if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<10000) //si la diferencia de intensidades
+            if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<15000) //si la diferencia de intensidades
             {                                                                   //es menor a una tolerancia y si el contador es
                 mask [pFila] [pCol] = true; //mascara verdadero (pinto)                // menor a un valor para que el programa no crashee
 

@@ -2,26 +2,18 @@
 
 Sistema::Sistema()
 {
-cout<<"AAAAA";
+
 }
 
 void Sistema::ejecutar(QApplication *pPtrApp)
 {
-  /*  unsigned int opcion=0;
-    string raiz="../imagenes/";
-//    Imagen img;
-//    GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_02.ppm");
-//    img=gda.Cargar();
-
-//    graf.setImagen(img);
-
-//    graf.mostrar(img.getAncho(),img.getAlto(),pPtrApp);
+    unsigned int opcion=1;
+    string raiz="../ProcesadorDeImagenes_4_0/";
 
     while(opcion <=4)
     {
-        cout<<"Elija una opcion:  ";
-        cin>>opcion;
-        cout<<endl<<endl;
+        ui.mostrarDir();
+        opcion=ui.getOpcion();
 
         switch (opcion){
         case 1:
@@ -55,46 +47,70 @@ void Sistema::ejecutar(QApplication *pPtrApp)
             exit(0);
             break;
         }
-     }
-        setDir(Dir);*/
+        }
 
-   Graficador graf;
-    Imagen img;
-       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_01.pgm");
-       img=gda.Cargar();
+      setDir(Dir);
+      ui.mostrarListaImagenes(getListaDeArchivos());
 
-       graf.setImagen(img);
+      graf.setListaDeArchivos(listaDeArchivos);
+      graf.setListaRutas(listaRutasDeArchivos);
+      graf.setImagen();
 
-       graf.mostrar(img.getAncho(),img.getAlto(),pPtrApp);
+      ui.getKeyBindings();
+      graf.mostrar(pPtrApp);
 
+      opcion=0;
+      listaDeArchivos.clear();
+      listaRutasDeArchivos.clear();
+
+
+
+
+
+//   Graficador graf;
+//    Imagen img;
+//       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_01.pgm");
+//       img=gda.Cargar();
+
+//       graf.setImagen(img);
+
+//       graf.mostrar(img.getAncho(),img.getAlto(),pPtrApp);
+
+    }
 }
 
 void Sistema::setDir(string pRutaDir)
 {
-    setSubDir(pRutaDir);
+    setListadoDeArchivos(pRutaDir);//cargo el vector
 
-    listaRutasDeArchivos.resize(listaDeArchivos.size());
+    listaRutasDeArchivos.resize(listaDeArchivos.size());// dimensiono el vector de rutas de imagenes
 
     for(int i=0; i< int(listaDeArchivos.size()); i++)
     {
-     //listaDeArchivos va a tener: entre_rios_03.ppm
-        listaRutasDeArchivos[i]= Dir + listaDeArchivos[i];
+
+        listaRutasDeArchivos[i]= Dir + listaDeArchivos[i];//asigno la ruta a cada imagen
+
     }
 
    }
 
-void Sistema::setSubDir(string pRutaDir)
+void Sistema::setListadoDeArchivos(string pRutaDir) // carga el vector listaDeArchivos con strings de los nombres de imagens
 {
     DIR *dir = opendir(pRutaDir.c_str());
+
     if (dir != NULL)
     {
+
         string pto("."), ptopto("..");
         struct dirent *entry;
         while ((entry = readdir(dir)) != NULL)
         {
+
             if( entry->d_name != pto and entry->d_name != ptopto )
             {
                 listaDeArchivos.push_back(entry->d_name);
+
+
             }
         }
         closedir(dir);

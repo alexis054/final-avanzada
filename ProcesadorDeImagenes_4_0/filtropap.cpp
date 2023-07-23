@@ -39,18 +39,18 @@ void FiltroPaP::Contraste(Imagen &pImagen)
 {
     Estadisticos stat;
     stat.setDatos(pImagen);
-    float R,G,B;
+    int R,G,B;
 
 
     for(int i=0;i<pImagen.getAlto();++i)
     {
        for(int j=0;j<pImagen.getAncho();++j)
         {
-          R=((pImagen.getPixel(i,j).getR()-stat.Min_R()));//(stat.Max_R()-stat.Min_R()))*pImagen.getM());
-          //G=((pImagen.getPixel(i,j).getG()-stat.Min_G()/(stat.Max_G()-stat.Min_G()))*pImagen.getM());
-         // B=((pImagen.getPixel(i,j).getB()-stat.Min_B()/(stat.Max_B()-stat.Min_B()))*pImagen.getM());
+          R=((pImagen.getPixel(i,j).getR()-stat.Min_R())/(stat.Max_R())-stat.Max_G());//(stat.Max_R()-stat.Min_R()))*pImagen.getM());
+          G=((pImagen.getPixel(i,j).getG()-stat.Min_G()/(stat.Max_G()-stat.Min_G())));
+          B=((pImagen.getPixel(i,j).getB()-stat.Min_B()/(stat.Max_B()-stat.Min_B())));
 
-          pImagen.ModificarPixelTerna(i,j,R,0,0);
+          pImagen.ModificarPixelTerna(i,j,R,G,B);
        }
     }
 }

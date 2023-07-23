@@ -5,6 +5,10 @@
 #include "filtroespacial.h"
 #include "filtropap.h"
 #include "lut.h"
+#include "gestordearchivos.h"
+#include "gestordearchivosaic.h"
+#include "gestordearchivospnm.h"
+#include "interfaz.h"
 #include <QApplication>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
@@ -21,12 +25,11 @@ class Graficador: public QOpenGLWidget, protected QOpenGLFunctions
 
 public:
     Graficador();
-     void mostrar(int pAncho, int pAlto, QApplication *pPtrApp);
-     void setImagen(const Imagen &newImagen);
-     void algoritmoPintor(int pFil,int pCol);
-
-
-
+     void mostrar( QApplication *pPtrApp);
+     void setImagen();
+     void algoritmoPintor(int pFil,int pCol); 
+     void setListaDeArchivos(const vector<string> &newListaDeArchivos);
+     void setListaRutas(const vector<string> &newListaRutas);
 
 protected:
      void initializeGL() override;
@@ -40,20 +43,42 @@ protected:
 
 
 private:
+
+
+     //Atributos
      Imagen imagen;
      Imagen imagenOriginal;
-     bool histo=false;
-     void pintarRecursivo(int pFil,int pCol);
-     void pintar();
-     float dela_intensidad=0.0;
-     float getIntensidadpix(Pixel pix);
-     float tolerancia=50;
      vector<vector<bool>> mask;
      Pixel pixInicioPintado;
+     GestorDeArchivos *gda;
+     Lut lut;
+     Interfaz ui;
+     vector<string> listaRutas;
+     vector<string> listaDeArchivos;
+     bool histo=false;
+     float dela_intensidad=0.0;
+     float tolerancia=50;
+     float relacionAncho;
+     float relacionAlto;
+     float escala;
+     float dx;
+     float dy;
      int columnaInicial;
      int filaInicial;
      int contador;
-     Lut lut;
+     unsigned int indice;
+
+
+
+
+     //Metodos
+
+     void pintarRecursivo(int pFil,int pCol);
+     void pintar();   
+     float getIntensidadpix(Pixel pix);
+
+
+
 };
 
 #endif // GRAFICADOR_H

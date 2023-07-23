@@ -1,7 +1,5 @@
 #include <QApplication>
 #include <gestordearchivospnm.h>
-#include <imagen.h>
-#include <string.h>
 #include <sistema.h>
 
 using namespace std;
