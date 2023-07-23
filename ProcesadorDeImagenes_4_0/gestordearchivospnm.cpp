@@ -28,7 +28,7 @@ Imagen GestorDeArchivosPNM::Cargar()
 
         if(archi.is_open()!=true)
 
-            throw runtime_error("Fallo en abrir archivo PNM");  //si no lo abre se devuelve el valor 1
+            throw runtime_error("Fallo en abrir archivo PNM");
 
 
 
@@ -190,7 +190,7 @@ Imagen GestorDeArchivosPNM::Cargar()
                                 archi.read((char*)& valorPixG,sizeof (unsigned char));
                                 archi.read((char*)& valorPixB,sizeof (unsigned char));
 
-                                rojo=(int)valorPixR;   //casteo de char a int
+                                rojo=(int)valorPixR;
                                 verde=(int)valorPixG;
                                 azul=(int)valorPixB;
 
@@ -249,7 +249,7 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
 
                 if(auxMono!=0)
                 {
-                    auxMono=1;//Normalizo los valores monocromáticos a 0 y 1 únicamente
+                    auxMono=1;
                 }
                 archi<<auxMono<<" ";
             }
@@ -290,11 +290,10 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
 
     if(pFormato=="P4" or pFormato=="P5" or pFormato=="P6")
     {
-        int pos=0;
-        archi.close();
 
+        archi.close();
         archi.open("../ProcesadorDeImagenes_4_0/Nuevas/"+pNombre, ios::binary|ios::app|ios::out);
-//
+
 
         if(pFormato=="P4")
         {
@@ -309,7 +308,7 @@ void GestorDeArchivosPNM::Guardar(string pNombre,string pFormato, Imagen &pImage
 
                     if(auxMono!=0)
                     {
-                        auxMono=1; //Normalizo los valores monocromáticos a 0 y 1 únicamente
+                        auxMono=1;
                     }
 
                     valorCanal=auxMono;

@@ -6,6 +6,8 @@ class Filtro
 {
 public:
     Filtro();
+
+
 };
 
 #endif // FILTRO_H

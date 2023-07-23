@@ -44,7 +44,7 @@ void Graficador::setImagen()
 
     delete gda;
 
-    setWindowTitle(nombre.c_str()); //casteo
+    setWindowTitle(nombre.c_str());
 
 }
 
@@ -57,7 +57,6 @@ void Graficador::initializeGL()
 
 void Graficador::resizeGL(int w, int h)
 {
-    //glViewport(0,0,width(),height());
     glViewport(0,0,w,h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -96,12 +95,10 @@ void Graficador::paintGL()
         dx=(width()-(float)(imagen.getAncho()*escala))*0.5f;
     }
 
-//---------------------------------grafico
-
-  if(histo==false)
+ // if(histo==false)
     DibujarImagen();
-  else
-    DibujarHistograma();
+  //else
+    //DibujarHistograma();// Por cuestiones de tiempo no se pudo implementar, crashea cuando se dibuja
 
 
 }
@@ -125,6 +122,16 @@ void Graficador::DibujarHistograma()
    {
        glColor3f(1,0,0);
        glVertex2f(Vec[i].getR(),stat.Hist_R()[Vec[i].getR()]);
+
+       glColor3f(0,1,0);
+       glVertex2f(Vec[i].getG(),stat.Hist_G()[Vec[i].getG()]);
+
+       glColor3f(0,0,1);
+       glVertex2f(Vec[i].getB(),stat.Hist_B()[Vec[i].getB()]);
+
+       glColor3f(1,1,1);
+       glVertex2f(Vec[i].intensidad(),stat.Hist_intensidad()[Vec[i].intensidad()]);
+
     }
    glPopMatrix();
    glEnd();
@@ -407,8 +414,8 @@ void Graficador::pintarRecursivo(int pFila, int pCol)
                 && pFila>0 && pCol>0)                            //rango
         {
             if(getIntensidadpix(imagen.getPixel(pFila,pCol)) <= tolerancia and mask[pFila][pCol]!=true and contador<15000) //si la diferencia de intensidades
-            {                                                                   //es menor a una tolerancia y si el contador es
-                mask [pFila] [pCol] = true; //mascara verdadero (pinto)                // menor a un valor para que el programa no crashee
+            {                                                                                                               //es menor a una tolerancia y si el contador es
+                mask [pFila] [pCol] = true; //mascara verdadero (pinto)                                                    // menor a un valor para que el programa no crashee
 
                 ++contador;// aumento el contador
 

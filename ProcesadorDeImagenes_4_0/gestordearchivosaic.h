@@ -1,3 +1,17 @@
+/*!
+ *  \class      GestorDeArchivos
+ *  \brief      Clase Encargado
+ *  \details    Es una clase virtual pura.
+ *  \author     Gonzalez Alexis Joaquin.
+ *  \version    1.0.0
+ *  \date       Fecha de creación: 2023-07-23
+ *  \date       Fecha de última modificación: 2023-07-23
+ *  \pre
+ *  \bug
+ *  \warning
+ *  \copyright
+*/
+
 #ifndef GESTORDEARCHIVOSAIC_H
 #define GESTORDEARCHIVOSAIC_H
 #include "gestordearchivos.h"

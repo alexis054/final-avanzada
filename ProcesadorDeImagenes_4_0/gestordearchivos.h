@@ -1,3 +1,18 @@
+
+/*!
+ *  \class      GestorDeArchivos
+ *  \brief      Clase abstracta creada para leer y guardar archivos de imagenes.
+ *  \details    Es una clase virtual pura.
+ *  \author     Gonzalez Alexis Joaquin.
+ *  \version    1.0.0
+ *  \date       Fecha de creación: 2023-7-23
+ *  \date       Fecha de última modificación: 2023-07-23
+ *  \pre
+ *  \bug
+ *  \warning
+ *  \copyright
+*/
+
 #ifndef GESTORDEARCHIVOS_H
 #define GESTORDEARCHIVOS_H
 #include <fstream>
@@ -10,12 +25,25 @@ using namespace std;
 class GestorDeArchivos
 {
 public:
+    /*!
+    * \brief Constructor de la clase GestorDeArchivos
+    */
     GestorDeArchivos();
+    /*!
+    * \brief Metodo virtual puro para guardar imagen
+    */
+    Imagen virtual Cargar()=0;
+    /*!
+    * \brief metodo virtual puro para guardar imagen
+    * \param pNombre: string con el nombre de la imagen a guardar
+    * \param pImagen: paso por referencia la imagen a guardar
+    */
+    void virtual Guardar(string pNombre,string pFormato, Imagen &pImagen)=0;
 
-//metodos virtuales
+    /*!
+    * \brief Destructor de la clase
+    */
 
-    Imagen virtual Cargar();
-    void virtual Guardar(string pNombre,string pFormato, Imagen &pImagen);
     virtual ~GestorDeArchivos(){};
 
  };

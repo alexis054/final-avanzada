@@ -63,19 +63,6 @@ void Sistema::ejecutar(QApplication *pPtrApp)
       listaDeArchivos.clear();
       listaRutasDeArchivos.clear();
 
-
-
-
-
-//   Graficador graf;
-//    Imagen img;
-//       GestorDeArchivosPNM gda("../imagenes/grupo_imagenes_2/entre_rios_01.pgm");
-//       img=gda.Cargar();
-
-//       graf.setImagen(img);
-
-//       graf.mostrar(img.getAncho(),img.getAlto(),pPtrApp);
-
     }
 }
 

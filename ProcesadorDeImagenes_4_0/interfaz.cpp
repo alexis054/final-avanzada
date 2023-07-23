@@ -8,23 +8,22 @@ Interfaz::Interfaz()
 void Interfaz::getKeyBindings()
 {
     cout<<endl<<endl;
-    cout << " --------------------------LISTA DE COMANDOS---------------------------------------"<<endl<<endl;
+    cout<<"___________________________________________________________________"<<endl;
+    cout <<"**********************LISTA DE COMANDOS***************************"<<endl;
+    cout <<"__________________________________________________________________"<<endl<<endl;
 
-    cout<<"1) Ctrl + flecha izquierda: Siguiente imagen en directorio"<<endl<<
-          "2) Ctrl + flecha izquierda: Anterior imagen en directorio"<<endl<<
-          "3) Ctrl + clic izquierdo: se pinta una region con el mismo color"<<endl<<
-          "4) Ctrl + '+' : aumentar brillo"<<endl<<
-          "5) Ctrl + '-' : disminuir brillo"<<endl<<
-          "6) Ctrl + c   : ajustar contrastre"<<endl<<
-          "7) Ctrl + b   : binarizar Imagen en gris"<<endl<<
-          "8) Ctrl + 1   : aplicar aplicar Pseudo Coloreo(LUT) purpura a Imagenes con Intensidad"<<endl<<
-          "9) Ctrl + 2   : aplicar aplicar Pseudo Coloreo(LUT) rojo y azul a Imagenes con Intensidad"<<endl<<
-          "10)Ctrl + s   : aplicar Filtro de Suavizado"<<endl<<
-          "11)Ctrl + m   : aplicar Filtro de Mediana"<<endl<<
-          "12)Ctrl + h   : mostrar histograma de la imagen"<<endl<<
-          "13)Ctrl + g   : guardar "<<endl;
-
-
+    cout<<" Ctrl + flecha izquierda: Siguiente imagen en directorio"<<endl<<
+          " Ctrl + flecha izquierda: Anterior imagen en directorio"<<endl<<
+          " Ctrl + clic izquierdo: se pinta una region con el mismo color"<<endl<<
+          " Ctrl + '+' : aumentar brillo"<<endl<<
+          " Ctrl + '-' : disminuir brillo"<<endl<<
+          " Ctrl + c   : ajustar contrastre"<<endl<<
+          " Ctrl + b   : binarizar Imagen"<<endl<<
+          " Ctrl + 1   : aplicar aplicar Pseudo Coloreo(LUT) Glow"<<endl<<
+          " Ctrl + 2   : aplicar aplicar Pseudo Coloreo(LUT) Turbo"<<endl<<
+          " Ctrl + s   : aplicar Filtro de Suavizado"<<endl<<
+          " Ctrl + m   : aplicar Filtro de Mediana"<<endl<<
+          " Ctrl + g   : guardar "<<endl;
 }
 
 string Interfaz::getNombreNueva()
@@ -51,15 +50,17 @@ string Interfaz::getFormatoNueva()
 void Interfaz::mostrarDir()
 {
   int aux=0;
+  cout<<"______________________________________________"<<endl;
+  cout<<"SELECCIONE LA CARPETA A LA QUE QUIERE INGRESAR"<<endl;
+  cout<<"______________________________________________"<<endl;
 
-  cout<<"SELECCIONE LA CARPETA A LA QUE QUIERE INGRESAR"<<endl<<endl;
   cout<<" 1) Carpeta 1 " <<endl<<
         " 2) Carpeta 2 " <<endl<<
         " 3) Carpeta 3: Corruptas " <<endl<<
         " 4) Carpeta 4: ij_image_samples"<<endl<<
         " 5) Carpeta 5: Imagenes Modificadas"<<endl<<
-        " 6) Salir del programa " <<endl;
-
+        " 6) Salir del programa " <<endl<<endl;
+cout<<"Eleccion: ";
   cin>>aux;
   setOpcion(aux);
 
@@ -70,20 +71,19 @@ void Interfaz::mostrarDir()
       cin>>opcion;
       setOpcion(aux);;
   }
-
+  cout<<endl<<endl;
   cout<<"Opcion escogida: "<<getOpcion();
+  cout<<endl<<endl;
 }
 
 void Interfaz::mostrarListaImagenes(vector<string> pLista)
 {
     cout<<endl;
     cout<<"LAS IMAGENES EN CARPETAS SON:"<<endl;
-    //for(unsigned int i=0;i<pLista.size();++i)
-   // {
-
-     cout<<"Aaa";
-        //cout<<pLista[i]<<endl;
-  //  }
+    for(unsigned int i=0;i<pLista.size();++i)
+   {
+        cout<<pLista[i]<<endl;
+  }
 
 }
 
