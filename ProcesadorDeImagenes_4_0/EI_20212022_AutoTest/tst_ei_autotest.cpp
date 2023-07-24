@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "../sistema.h"
-
+#include <QApplication>
 
 typedef unsigned int uint;
 
@@ -165,10 +165,10 @@ vector<string> EI_AutoTest::listaDeArchivosDeImagen()
 
     // Aquí el código de la prueba
 
-      Sistema sist;
-   sist.setDir(ruta);
-    resultado=sist.getListaDeArchivos();
-
+//     Sistema sist;
+//   sist.setDir(ruta);
+//   resultado=sist.getListaDeArchivos();
+//
 
     return resultado;
 }
@@ -182,12 +182,12 @@ string EI_AutoTest::tipoDeArchivo01()
 
     // Aquí el código de la prueba
 
-//    string ruta= "../grupo_imagenes_1/test_01.pgm";
-//    GestorDeArchivosPNM gda(ruta);
-//    Imagen img;
+    string ruta= "../grupo_imagenes_1/test_01.pgm";
+    GestorDeArchivosPNM gda(ruta);
+    Imagen img;
 
-//    img=gda.Cargar();
-//    tipo=img.getFormato();
+    img=gda.Cargar();
+    tipo=img.getFormato();
 
     return tipo;
 }

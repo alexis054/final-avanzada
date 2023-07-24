@@ -28,7 +28,7 @@ public:
      * \brief ejecutar es un metodo que se encarga de la ejecucion del programa.
      * \param pPtrApp es un puntero a un objeto QApplication encargado de la lanzar la ejecucion.
      */
-   void ejecutar (QApplication* pPtrApp);
+    void ejecutar (QApplication* pPtrApp);
      /*!
     * \brief setDir es un metodo que obtiene los nombres de los archivos en el direcotio
     * \param pRutaDir contiene la ruta del directorio
