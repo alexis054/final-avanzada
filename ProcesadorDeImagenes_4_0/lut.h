@@ -1,6 +1,6 @@
 /*!
  *  \class      Lut
- *  \brief      Clase encargada de modificar los pixeles de una imagen
+ *  \brief      Clase encargada de modificar los pixeles de una imagen a partir de las tablas de lut
  *  \details    Modifica pixeles segun las tablas de lut
  *  \author     Gonzalez Alexis Joaquin.
  *  \version    1.0.0
