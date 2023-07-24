@@ -5,7 +5,6 @@ var class_pixel =
     [ "getG", "class_pixel.html#a73928242bfb8088afd8732e8122f2e23", null ],
     [ "getR", "class_pixel.html#a9e7df91a9a33e501d880a03878a031a6", null ],
     [ "intensidad", "class_pixel.html#ad0187ad042351c894171f729e2f8f44e", null ],
-    [ "modulo", "class_pixel.html#a63efc5badb6b97940986e728d0daae80", null ],
     [ "operator+", "class_pixel.html#a3b1eabfb8dbe1f3847a92cffb03b2605", null ],
     [ "operator/", "class_pixel.html#ab240bd5d2434da2ef44e3aff8c549527", null ],
     [ "operator<", "class_pixel.html#a51a8eec4fd93e1d314206fdcbe3ac8dc", null ],

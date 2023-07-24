@@ -7,7 +7,6 @@ var class_imagen =
     [ "getM", "class_imagen.html#aa81d99bf5213a60b0e1cb324972a39d5", null ],
     [ "getMetadatos", "class_imagen.html#a8083aca7d63f06d97a9af3bd794e9278", null ],
     [ "getPixel", "class_imagen.html#a076c1e9796d84e7650ab37f2634cf6d3", null ],
-    [ "ModificarPixel", "class_imagen.html#adc2c076d6455a0186e6ac77ecdcbe796", null ],
     [ "ModificarPixelTerna", "class_imagen.html#a93b885358e8053ea048f517516992a0b", null ],
     [ "ReservarMemoria", "class_imagen.html#a148958e39e672a7c13f99cb56e9415e5", null ],
     [ "setAlto", "class_imagen.html#a7b795fce6675e8cf4a2304d182e6093e", null ],

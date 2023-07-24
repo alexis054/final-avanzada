@@ -2,6 +2,8 @@ var class_estadisticos =
 [
     [ "Estadisticos", "class_estadisticos.html#ae70b2b4f47b9e43f0c03a8a32cca9927", null ],
     [ "DesvioSTD", "class_estadisticos.html#a8fdb4349f54ca45a590dc90b813034d6", null ],
+    [ "getMF_B", "class_estadisticos.html#aa69d63158737e3ee6444260eb6948efc", null ],
+    [ "getMF_G", "class_estadisticos.html#a773899996d10f51c89dca797fb1af6fc", null ],
     [ "getMF_intensidad", "class_estadisticos.html#a93189164278e3b176a7b7a583347fde6", null ],
     [ "getMF_R", "class_estadisticos.html#a6d8d13b8d493bc965ff6e2f9b5ec1206", null ],
     [ "getVec", "class_estadisticos.html#a618a58646d42ce962ddc763377bd580c", null ],

@@ -1,10 +1,9 @@
 var hierarchy =
 [
     [ "Estadisticos", "class_estadisticos.html", null ],
-    [ "Filtro", "class_filtro.html", [
-      [ "FiltroEspacial", "class_filtro_espacial.html", null ],
-      [ "FiltroPaP", "class_filtro_pa_p.html", null ]
-    ] ],
+    [ "Filtro", "class_filtro.html", null ],
+    [ "FiltroEspacial", "class_filtro_espacial.html", null ],
+    [ "FiltroPaP", "class_filtro_pa_p.html", null ],
     [ "GestorDeArchivos", "class_gestor_de_archivos.html", [
       [ "GestorDeArchivosAIC", "class_gestor_de_archivos_a_i_c.html", null ],
       [ "GestorDeArchivosPNM", "class_gestor_de_archivos_p_n_m.html", null ]

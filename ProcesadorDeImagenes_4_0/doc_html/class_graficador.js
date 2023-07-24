@@ -19,7 +19,6 @@ var class_graficador =
     [ "setListaRutas", "class_graficador.html#a2a89f635f8eaba25d97c935694c2b0fd", null ],
     [ "columnaInicial", "class_graficador.html#a17cb173fa06d274759c8120f0996bc3f", null ],
     [ "contador", "class_graficador.html#ab786a2ab4dca3eb1dadb1ad6ca49a4d9", null ],
-    [ "dela_intensidad", "class_graficador.html#af01f4e0c34afaced1e52c2919e59bd20", null ],
     [ "dx", "class_graficador.html#a093b91f50ef8671a1e92eeb23750ea54", null ],
     [ "dy", "class_graficador.html#a6eda2e893e3c8d2b3605bb81efd3f8d9", null ],
     [ "escala", "class_graficador.html#a16c6ed48a726a4f747a9c1bb2ecb2a95", null ],

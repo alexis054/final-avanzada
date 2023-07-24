@@ -23,6 +23,8 @@ var searchData=
   ['getlistarutasdearchivos',['getListaRutasDeArchivos',['../class_sistema.html#add86cc5ec3f76380d84b9e86c1eff880',1,'Sistema']]],
   ['getm',['getM',['../class_imagen.html#aa81d99bf5213a60b0e1cb324972a39d5',1,'Imagen']]],
   ['getmetadatos',['getMetadatos',['../class_imagen.html#a8083aca7d63f06d97a9af3bd794e9278',1,'Imagen']]],
+  ['getmf_5fb',['getMF_B',['../class_estadisticos.html#aa69d63158737e3ee6444260eb6948efc',1,'Estadisticos']]],
+  ['getmf_5fg',['getMF_G',['../class_estadisticos.html#a773899996d10f51c89dca797fb1af6fc',1,'Estadisticos']]],
   ['getmf_5fintensidad',['getMF_intensidad',['../class_estadisticos.html#a93189164278e3b176a7b7a583347fde6',1,'Estadisticos']]],
   ['getmf_5fr',['getMF_R',['../class_estadisticos.html#a6d8d13b8d493bc965ff6e2f9b5ec1206',1,'Estadisticos']]],
   ['getnombrenueva',['getNombreNueva',['../class_interfaz.html#a7a143a963f1b08d6ca78fbb3a76dca48',1,'Interfaz']]],

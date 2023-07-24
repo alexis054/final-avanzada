@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"functions_vars.html":[4,3,2],
-"gestordearchivos_8cpp.html":[5,0,10],
 "gestordearchivos_8cpp_source.html":[5,0,10],
 "gestordearchivos_8h.html":[5,0,11],
 "gestordearchivos_8h_source.html":[5,0,11],
@@ -13,8 +11,8 @@ var NAVTREEINDEX4 =
 "gestordearchivospnm_8cpp_source.html":[5,0,14],
 "gestordearchivospnm_8h.html":[5,0,15],
 "gestordearchivospnm_8h_source.html":[5,0,15],
-"globals.html":[5,1,0],
 "globals.html":[5,1,0,0],
+"globals.html":[5,1,0],
 "globals_defs.html":[5,1,3,0],
 "globals_defs.html":[5,1,3],
 "globals_defs_i.html":[5,1,3,1],
