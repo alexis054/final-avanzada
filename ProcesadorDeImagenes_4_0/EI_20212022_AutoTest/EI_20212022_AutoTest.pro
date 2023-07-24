@@ -20,11 +20,11 @@ SOURCES +=  tst_ei_autotest.cpp \
     ../graficador.cpp \
     ../imagen.cpp \
     ../interfaz.cpp \
+    ../lut.cpp \
     ../pixel.cpp \
     ../sistema.cpp
 HEADERS += \
     ../estadisticos.h \
-    ../filtro.h \
     ../filtroespacial.h \
     ../filtropap.h \
     ../gestordearchivos.h \
@@ -33,5 +33,6 @@ HEADERS += \
     ../graficador.h \
     ../imagen.h \
     ../interfaz.h \
+    ../lut.h \
     ../pixel.h \
     ../sistema.h

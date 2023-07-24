@@ -1,12 +1,11 @@
-
 /*!
  *  \class      GestorDeArchivos
  *  \brief      Clase abstracta creada para leer y guardar archivos de imagenes.
  *  \details    Es una clase virtual pura.
  *  \author     Gonzalez Alexis Joaquin.
  *  \version    1.0.0
- *  \date       Fecha de creación: 2023-7-23
- *  \date       Fecha de última modificación: 2023-07-23
+ *  \date       Fecha de creación: 2023-04-06
+ *  \date       Fecha de última modificación: 2023-07-24
  *  \pre
  *  \bug
  *  \warning
@@ -17,8 +16,8 @@
 #define GESTORDEARCHIVOS_H
 #include <fstream>
 #include <string>
-#include "imagen.h"
 #include <iostream>
+#include "imagen.h"
 
 using namespace std;
 

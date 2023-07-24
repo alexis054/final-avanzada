@@ -182,14 +182,13 @@ string EI_AutoTest::tipoDeArchivo01()
 
     // Aquí el código de la prueba
 
-    string ruta= "../grupo_imagenes_1/test_01.pgm";
-    GestorDeArchivosPNM gda(ruta);
-    Imagen img;
+//    string ruta= "../grupo_imagenes_1/test_01.pgm";
+//    GestorDeArchivosPNM gda(ruta);
+//    Imagen img;
 
-    img=gda.Cargar();
-    tipo=img.getFormato();
+//    img=gda.Cargar();
+//    tipo=img.getFormato();
 
-    tipo="P5";
     return tipo;
 }
 
@@ -510,12 +509,12 @@ void EI_AutoTest::test_case_imagenes_pixeles_rgb_03()
     QCOMPARE(getIntensidadesRGB03(), make_tuple(206u, 197u, 190u));
 }
 
-void EI_AutoTest::test_case_histograma_escala_grises_01() //falta
+void EI_AutoTest::test_case_histograma_escala_grises_01()
 {
     QCOMPARE(getPixelGrisMasFrecuenteYSuCantidad01(), make_tuple(142, 3058u));
 }
 
-void EI_AutoTest::test_case_histograma_rgb_01()  //falta
+void EI_AutoTest::test_case_histograma_rgb_01()
 {
     QCOMPARE(getPixelColorMasFrecuenteYSuCantidad01(), make_tuple(112, 9207u));
 }

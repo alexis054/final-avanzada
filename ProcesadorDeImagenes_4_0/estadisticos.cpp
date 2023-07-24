@@ -177,8 +177,6 @@ Pixel Estadisticos::Moda()
         res=Vec[n-1];
     }
 
-    cout<<"  Max_count:"<<max_count;
-
     return res;
 }
 
@@ -239,7 +237,7 @@ int Estadisticos::MedianaB()
     for(unsigned int i=0;i<Vec.size();++i)
     {
         aux.push_back(Vec[i].getB());
-        cout<<aux[i];
+
     }
 
     sort(aux.begin(),aux.end());
@@ -421,6 +419,16 @@ const pair<unsigned int, unsigned int> &Estadisticos::getMF_R() const
 const pair<unsigned int, unsigned int> &Estadisticos::getMF_intensidad() const
 {
     return MF_intensidad;
+}
+
+const pair<unsigned int, unsigned int> &Estadisticos::getMF_G() const
+{
+    return MF_G;
+}
+
+const pair<unsigned int, unsigned int> &Estadisticos::getMF_B() const
+{
+    return MF_B;
 }
 
 

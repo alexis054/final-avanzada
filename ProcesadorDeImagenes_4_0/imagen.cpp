@@ -51,12 +51,12 @@ void Imagen::setMetadatos(const string &newMetadatos)
 }
 //metodos
 
-    void Imagen::ModificarPixel(int pPosF,int pPosC,Pixel pPix)
-{
-    Img[pPosF][pPosC].setR(pPix.getR());
-    Img[pPosF][pPosC].setG(pPix.getG());
-    Img[pPosF][pPosC].setB(pPix.getB());
-    }
+//    void Imagen::ModificarPixel(int pPosF,int pPosC,Pixel pPix)
+//{
+//    Img[pPosF][pPosC].setR(pPix.getR());
+//    Img[pPosF][pPosC].setG(pPix.getG());
+//    Img[pPosF][pPosC].setB(pPix.getB());
+//    }
 
     void Imagen::ModificarPixelTerna(int pPosF, int pPosC, int pR, int pG, int pB)
     {

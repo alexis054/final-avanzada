@@ -15,7 +15,6 @@ LIBS += -lopengl32 # agrego esto
 
 SOURCES += \
         estadisticos.cpp \
-        filtro.cpp \
         filtroespacial.cpp \
         filtropap.cpp \
         gestordearchivos.cpp \
@@ -36,7 +35,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     estadisticos.h \
-    filtro.h \
     filtroespacial.h \
     filtropap.h \
     gestordearchivos.h \

@@ -78,15 +78,6 @@ Pixel Pixel::operator +(Pixel &pPix)
  }
 //--------------------------------------------------------------------------------------------------------------------------
 
-float Pixel::modulo()
-{
-    float modulo;
-
-        modulo=sqrt((R*R)+(G*G)+(B*B));
-
-        return modulo;
-}
-
 int Pixel::intensidad()
 {
 
